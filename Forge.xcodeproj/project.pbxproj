@@ -28,12 +28,14 @@
 		57A7F33C149F14DAD690C05D /* GlowWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 51E636296A862020AC334545 /* GlowWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		59F3FDD42D591733668B0496 /* DateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE39121B0C54C21AA321A84 /* DateHeader.swift */; };
 		5AB5FC2113EE08663DD64B49 /* GlowWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0464C95BC671D743DE623B /* GlowWatchApp.swift */; };
+		5DF4F91496C8B78CC4BED9CA /* DNAReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850E9507F6184128B7069450 /* DNAReport.swift */; };
 		60D7BE8C99F9142CF0908A77 /* SeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16204BD1647BF64DD02CA257 /* SeedData.swift */; };
 		62588B2545B10AC44644013F /* RoutineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0305FA0EEEBED8FD4077B34F /* RoutineDetailView.swift */; };
 		6BD44DF5EDA1396D65BBAB7F /* GlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF8ABD2D03DBFDD385C368 /* GlowApp.swift */; };
 		6F4CB9ABA5F0D9428869C46B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D82A40972609BE5B64925B3C /* Assets.xcassets */; };
 		758CFBA96A8DAA69A4ABAC67 /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F51BBE65034CE6160E8AF3 /* ExerciseDetailView.swift */; };
 		7818CEB07DBD388AA52E7B97 /* WatchTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5E63084A11FE7DA12C86F /* WatchTodayView.swift */; };
+		87777DEBEF77FC48FDA9CC72 /* DetailedInsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3181F9EABE8D5BC1C1B2E203 /* DetailedInsightsView.swift */; };
 		8C48F36B7A6177F61BF1EBB4 /* ExerciseFigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D94D4D82780EA95BE55042 /* ExerciseFigure.swift */; };
 		8DE75CBBAED5A450CC594B62 /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E38F3F45E856BED97F187A /* RoutineListView.swift */; };
 		93BA021775AC6501A9B2AA90 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E14CC2A1677F706B152395 /* WelcomeView.swift */; };
@@ -91,6 +93,7 @@
 		26D94D4D82780EA95BE55042 /* ExerciseFigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFigure.swift; sourceTree = "<group>"; };
 		2B61EB89A6E2875B55709449 /* NutritionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionView.swift; sourceTree = "<group>"; };
 		2D02324C2958C1546EF9B8D8 /* HormoneInsight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HormoneInsight.swift; sourceTree = "<group>"; };
+		3181F9EABE8D5BC1C1B2E203 /* DetailedInsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInsightsView.swift; sourceTree = "<group>"; };
 		3307960E92E5145F49EC7498 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		3BD2E63488DD8CCBD2623030 /* HealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
 		3C4F6319A9DB13A31FB362B9 /* ExerciseLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibrary.swift; sourceTree = "<group>"; };
@@ -109,6 +112,7 @@
 		71015E750650F46039035837 /* FocusSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSessionView.swift; sourceTree = "<group>"; };
 		758D429FB8AEDB062CAC8F0E /* SleepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepStore.swift; sourceTree = "<group>"; };
 		81BF2B6C7E72283B4C5EDC6D /* PlanParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanParser.swift; sourceTree = "<group>"; };
+		850E9507F6184128B7069450 /* DNAReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAReport.swift; sourceTree = "<group>"; };
 		873682C642D8FE4D265FFD1E /* DNAInsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAInsightsView.swift; sourceTree = "<group>"; };
 		929706BF2C22B4E63476C216 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9D01F0DDB92F4A48EDAF0298 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -141,6 +145,7 @@
 				B9BD28E2AA7A6170E314E67A /* CalendarService.swift */,
 				6E3237A42A929FCE680185A5 /* ConnectivityService.swift */,
 				BAFB0F2277988707A0641826 /* DNAImporter.swift */,
+				850E9507F6184128B7069450 /* DNAReport.swift */,
 				55DCA528D092513CCB18B3B1 /* ExerciseGuide.swift */,
 				3C4F6319A9DB13A31FB362B9 /* ExerciseLibrary.swift */,
 				3BD2E63488DD8CCBD2623030 /* HealthService.swift */,
@@ -223,6 +228,7 @@
 		7DD4AE7D7E16933F66F347AC /* Fitness */ = {
 			isa = PBXGroup;
 			children = (
+				3181F9EABE8D5BC1C1B2E203 /* DetailedInsightsView.swift */,
 				873682C642D8FE4D265FFD1E /* DNAInsightsView.swift */,
 				B2275A20906FE573CA34EA09 /* ProfileView.swift */,
 				9EE6FF7BCAE968D69A574848 /* RoutineEditorView.swift */,
@@ -381,7 +387,9 @@
 				490237B29D41D72FC6BFDF8B /* ConnectivityService.swift in Sources */,
 				22C5C6A205C208EB07196138 /* DNAImporter.swift in Sources */,
 				BA39F19BAD0871C12740391E /* DNAInsightsView.swift in Sources */,
+				5DF4F91496C8B78CC4BED9CA /* DNAReport.swift in Sources */,
 				59F3FDD42D591733668B0496 /* DateHeader.swift in Sources */,
+				87777DEBEF77FC48FDA9CC72 /* DetailedInsightsView.swift in Sources */,
 				E43362F1B241ED13FD1B1E94 /* EmptyState.swift in Sources */,
 				758CFBA96A8DAA69A4ABAC67 /* ExerciseDetailView.swift in Sources */,
 				8C48F36B7A6177F61BF1EBB4 /* ExerciseFigure.swift in Sources */,

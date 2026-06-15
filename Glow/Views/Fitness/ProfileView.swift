@@ -219,6 +219,7 @@ struct ProfileView: View {
                 if let l = traits.lactoseTolerant { lactoseTolerant = l }
                 if let vd = traits.vitaminD { vitaminD = vd }
                 if let b = traits.b12 { b12 = b }
+                if !traits.panelCSV.isEmpty { currentProfile().dnaPanel = traits.panelCSV }
                 save()
                 if traits.foundCount > 0 {
                     // Jump straight to the visualization on success.

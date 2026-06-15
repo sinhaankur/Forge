@@ -381,6 +381,12 @@ final class UserProfile {
     /// Optional avatar image, stored locally (JPEG data). External so it's lazy.
     @Attribute(.externalStorage) var avatarData: Data? = nil
 
+    /// Genotypes for Forge's known wellness-SNP panel only (rsid:genotype CSV,
+    /// e.g. "rs1815739:CT,rs8192678:CC"). On-device only; NOT the whole genome —
+    /// just the ~15 SNPs Forge interprets, so detailed insights can be shown
+    /// without re-reading the file.
+    var dnaPanel: String = ""
+
     init(
         heightCm: Double = 175,
         weightKg: Double = 75,

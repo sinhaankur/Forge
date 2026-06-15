@@ -12,11 +12,17 @@ struct DNAInsightsView: View {
 
     enum Mode: String, CaseIterable, Identifiable {
         case cards = "Cards"
+        case detailed = "Detailed"
         case radar = "Radar"
         case genome = "Genome"
         var id: String { rawValue }
     }
     @State private var mode: Mode = .cards
+
+    private var detailedInsights: [DNAReport.Insight] {
+        guard let csv = profile?.dnaPanel, !csv.isEmpty else { return [] }
+        return DNAReport.insights(fromPanelCSV: csv)
+    }
 
     var body: some View {
         NavigationStack {
@@ -33,6 +39,8 @@ struct DNAInsightsView: View {
                         switch mode {
                         case .cards:
                             ForEach(cards) { card in DNACard(card: card) }
+                        case .detailed:
+                            DetailedInsightsView(insights: detailedInsights)
                         case .radar:
                             RadarChartView(scores: radarScores)
                         case .genome:

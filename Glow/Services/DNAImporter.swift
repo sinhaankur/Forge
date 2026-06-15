@@ -30,6 +30,8 @@ enum DNAImporter {
         var lactoseTolerant: Bool?
         var vitaminD: VitaminDTendency?
         var b12: B12Methylation?
+        /// Genotypes for the detailed DNAReport panel: "rsid:GT,rsid:GT".
+        var panelCSV: String = ""
 
         /// Number of markers successfully read.
         var foundCount: Int {
@@ -87,6 +89,11 @@ enum DNAImporter {
             t.b12 = g.contains("T") ? .reduced : .efficient
         }
 
+        // Capture the full detailed panel (only our known SNPs) for rich insights.
+        t.panelCSV = DNAReport.panelRsids
+            .compactMap { rs in genotypes[rs].map { "\(rs):\($0)" } }
+            .joined(separator: ",")
+
         return t
     }
 
@@ -101,11 +108,8 @@ enum DNAImporter {
     private static func genotypeMap(from text: String) -> [String: String] {
         var map: [String: String] = [:]
         // Only the SNPs we care about — keeps it fast and avoids holding the
-        // whole genome in memory.
-        let wanted: Set<String> = [
-            "rs8192678", "rs762551", "rs9939609",
-            "rs4988235", "rs2282679", "rs1801133",
-        ]
+        // whole genome in memory. Includes the detailed DNAReport panel.
+        let wanted = Set(DNAReport.panelRsids)
 
         text.enumerateLines { line, _ in
             // MyHeritage wraps every field in quotes; strip them. 23andMe/Ancestry don't.
