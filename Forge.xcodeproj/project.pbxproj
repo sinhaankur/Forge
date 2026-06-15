@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		01EAF64CD8FD2AF662351119 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D01F0DDB92F4A48EDAF0298 /* Models.swift */; };
+		06BE149E6FAC7157D1773C5D /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BD28E2AA7A6170E314E67A /* CalendarService.swift */; };
 		0C3D6CA312074B4679773F32 /* NutritionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61EB89A6E2875B55709449 /* NutritionView.swift */; };
 		0F3AD91A84376BD1B98139F0 /* ProgressView_Glow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F578C08607E838EE3803FB5 /* ProgressView_Glow.swift */; };
 		0FE72B7081231928301F062D /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71F3E176B0CC5E48512556 /* ProfileHeader.swift */; };
+		134D5C92EBE01E2130648C10 /* PlanAroundDayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F2E71C192ECE3CEBD1580 /* PlanAroundDayCard.swift */; };
 		1DE8CC05014E1AE135716EA3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F3C9A8EA91F4160FDF4E9 /* Theme.swift */; };
 		22C5C6A205C208EB07196138 /* DNAImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB0F2277988707A0641826 /* DNAImporter.swift */; };
 		490237B29D41D72FC6BFDF8B /* ConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3237A42A929FCE680185A5 /* ConnectivityService.swift */; };
@@ -83,6 +85,7 @@
 		51E14CC2A1677F706B152395 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		51E636296A862020AC334545 /* GlowWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlowWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineStore.swift; sourceTree = "<group>"; };
+		695F2E71C192ECE3CEBD1580 /* PlanAroundDayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanAroundDayCard.swift; sourceTree = "<group>"; };
 		6E3237A42A929FCE680185A5 /* ConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityService.swift; sourceTree = "<group>"; };
 		758D429FB8AEDB062CAC8F0E /* SleepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepStore.swift; sourceTree = "<group>"; };
 		873682C642D8FE4D265FFD1E /* DNAInsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAInsightsView.swift; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 		A5C5E63084A11FE7DA12C86F /* WatchTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTodayView.swift; sourceTree = "<group>"; };
 		ADE39121B0C54C21AA321A84 /* DateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeader.swift; sourceTree = "<group>"; };
 		B2275A20906FE573CA34EA09 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B9BD28E2AA7A6170E314E67A /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		BAFB0F2277988707A0641826 /* DNAImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAImporter.swift; sourceTree = "<group>"; };
 		CBC30FB99C682257359F82EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D82A40972609BE5B64925B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 		00A769BBB2452051D9B4335D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B9BD28E2AA7A6170E314E67A /* CalendarService.swift */,
 				6E3237A42A929FCE680185A5 /* ConnectivityService.swift */,
 				BAFB0F2277988707A0641826 /* DNAImporter.swift */,
 				3C4F6319A9DB13A31FB362B9 /* ExerciseLibrary.swift */,
@@ -124,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				ADE39121B0C54C21AA321A84 /* DateHeader.swift */,
+				695F2E71C192ECE3CEBD1580 /* PlanAroundDayCard.swift */,
 				9F71F3E176B0CC5E48512556 /* ProfileHeader.swift */,
 				0305FA0EEEBED8FD4077B34F /* RoutineDetailView.swift */,
 			);
@@ -329,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06BE149E6FAC7157D1773C5D /* CalendarService.swift in Sources */,
 				490237B29D41D72FC6BFDF8B /* ConnectivityService.swift in Sources */,
 				22C5C6A205C208EB07196138 /* DNAImporter.swift in Sources */,
 				BA39F19BAD0871C12740391E /* DNAInsightsView.swift in Sources */,
@@ -340,6 +347,7 @@
 				01EAF64CD8FD2AF662351119 /* Models.swift in Sources */,
 				FD9C69117FD5B1322AA455F0 /* NotificationService.swift in Sources */,
 				0C3D6CA312074B4679773F32 /* NutritionView.swift in Sources */,
+				134D5C92EBE01E2130648C10 /* PlanAroundDayCard.swift in Sources */,
 				0FE72B7081231928301F062D /* ProfileHeader.swift in Sources */,
 				D00A7883601D70924829FEF0 /* ProfileView.swift in Sources */,
 				0F3AD91A84376BD1B98139F0 /* ProgressView_Glow.swift in Sources */,

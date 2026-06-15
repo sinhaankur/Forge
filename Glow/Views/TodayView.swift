@@ -44,6 +44,9 @@ struct TodayView: View {
                     // Daily readiness (sleep + recovery + consistency).
                     readinessRow
 
+                    // Calendar-aware workout planner.
+                    PlanAroundDayCard()
+
                     // Wide dot-calendar card with a docked routine row.
                     calendarCard
 

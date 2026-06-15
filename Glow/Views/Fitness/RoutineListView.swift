@@ -18,8 +18,8 @@ struct RoutineListView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text(kind.title.uppercased())
-                        .font(GlowTheme.display())
+                    Text(kind.title)
+                        .font(.system(size: 34, weight: .heavy))
                         .foregroundStyle(GlowTheme.ink)
                         .padding(.top, 8)
 

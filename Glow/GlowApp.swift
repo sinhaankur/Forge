@@ -59,6 +59,7 @@ struct RootView: View {
         .task {
             await NotificationService.shared.requestAuthorization()
             await NotificationService.shared.reschedule(for: routines)
+            await NotificationService.shared.scheduleSmartReminders()
             pushSnapshot()
             // Handle completion commands coming from the watch.
             ConnectivityService.shared.onCommand = { command in
