@@ -6,6 +6,9 @@ import SwiftData
 struct NutritionView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Meal.slotRaw) private var meals: [Meal]
+    @Query private var profiles: [UserProfile]
+
+    private var profile: UserProfile? { profiles.first }
 
     private var sortedMeals: [Meal] {
         meals.sorted { $0.slot.sortIndex < $1.slot.sortIndex }
@@ -27,6 +30,10 @@ struct NutritionView: View {
                         .padding(.top, 8)
 
                     proteinCard
+
+                    if let tips = geneticFuelingTips, !tips.isEmpty {
+                        geneticFuelingCard(tips)
+                    }
 
                     Text("TODAY'S PLAN")
                         .font(GlowTheme.headline(14)).kerning(1)
@@ -85,6 +92,52 @@ struct NutritionView: View {
     private var progress: CGFloat {
         guard proteinTotal > 0 else { return 0 }
         return min(1, CGFloat(proteinLogged) / CGFloat(proteinTotal))
+    }
+
+    /// Personalized fueling guidance derived from the user's on-device genetic
+    /// trait toggles. Returns nil when no traits are set.
+    private var geneticFuelingTips: [(icon: String, text: String)]? {
+        guard let p = profile else { return nil }
+        var tips: [(String, String)] = []
+        if p.carb == .resilient {
+            tips.append(("leaf.circle.fill",
+                "Carb-resilient: keep clean carbs (oats, brown rice, sweet potato) around your workout windows to fuel training — no need to fear them."))
+        }
+        if p.lactoseTolerant {
+            tips.append(("cup.and.saucer.fill",
+                "Dairy-friendly: Greek yogurt, cottage cheese, paneer, and whey isolate are excellent, highly bioavailable recovery protein for you."))
+        }
+        if p.aerobic == .high {
+            tips.append(("wind",
+                "High aerobic response: prioritize steady fueling for zone-2 work — slightly more carbs on long-cardio days."))
+        }
+        if p.caffeine == .fast {
+            tips.append(("bolt.fill",
+                "Fast caffeine metabolizer: a black coffee 30–45 min pre-workout gives a clean boost without disrupting sleep."))
+        }
+        return tips
+    }
+
+    private func geneticFuelingCard(_ tips: [(icon: String, text: String)]) -> some View {
+        GlowPanel {
+            VStack(alignment: .leading, spacing: 10) {
+                Label("GENETIC FUELING", systemImage: "dna")
+                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.accent)
+                ForEach(Array(tips.enumerated()), id: \.offset) { _, tip in
+                    HStack(alignment: .top, spacing: 8) {
+                        Image(systemName: tip.icon)
+                            .font(.system(size: 13))
+                            .foregroundStyle(GlowTheme.accent)
+                            .frame(width: 18)
+                        Text(tip.text)
+                            .font(GlowTheme.body(14))
+                            .foregroundStyle(GlowTheme.ink)
+                    }
+                }
+                Text("Based on the genetic traits in your profile · stays on this device")
+                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+            }
+        }
     }
 
     private func mealRow(_ meal: Meal) -> some View {

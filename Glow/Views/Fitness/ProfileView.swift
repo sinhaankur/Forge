@@ -64,6 +64,16 @@ struct ProfileView: View {
                 Section("Genetic insights (optional)") {
                     Text("If you know these from a DNA report, Forge tunes your plan. Stored only on this device — never uploaded.")
                         .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                    Button {
+                        // Quick-apply: the endurance-leaning, dairy-friendly,
+                        // carb-resilient, fast-caffeine profile.
+                        aerobic = .high
+                        caffeine = .fast
+                        carb = .resilient
+                        lactoseTolerant = true
+                    } label: {
+                        Label("Apply my DNA markers", systemImage: "sparkles")
+                    }
                     Picker("Aerobic response", selection: $aerobic) {
                         ForEach(AerobicResponse.allCases) { Text($0.title).tag($0) }
                     }
