@@ -5,51 +5,39 @@ import SwiftUI
 /// with a single warm coral→amber accent. Light + dark adaptive.
 enum GlowTheme {
 
-    // MARK: Accent (the only color)
+    // MARK: Accent
 
-    static let coral = Color(hex: "#FF7E5F")
-    static let amber = Color(hex: "#FEB47B")
+    /// Electric orange hero accent (dark-first design).
+    static let orange = Color(hex: "#FF3B0F")
+    static let orangeBright = Color(hex: "#FF5A2C")
 
-    /// The single warm accent gradient — used sparingly (today's dot, completed
-    /// strike-throughs, primary actions).
+    /// The accent gradient — used for rings, primary actions, key numerals.
     static var accentGradient: LinearGradient {
-        LinearGradient(colors: [coral, amber], startPoint: .leading, endPoint: .trailing)
+        LinearGradient(colors: [orange, orangeBright], startPoint: .leading, endPoint: .trailing)
     }
 
     /// Flat accent for text / small marks.
-    static let accent = coral
+    static let accent = orange
 
-    // MARK: Monochrome surfaces
+    // MARK: Dark-first surfaces (forced dark regardless of system setting)
 
-    /// Page background — warm off-white in light, near-black in dark.
-    static var background: Color {
-        Color(uiColorLightDark: (light: UIColor(white: 0.95, alpha: 1),
-                                 dark: UIColor(white: 0.10, alpha: 1)))
-    }
+    /// Page background — near-black.
+    static let background = Color(hex: "#0B0B0C")
 
-    /// Slightly raised surface / panel.
-    static var surface: Color {
-        Color(uiColorLightDark: (light: .white,
-                                 dark: UIColor(white: 0.16, alpha: 1)))
-    }
+    /// Raised bento card / panel.
+    static let surface = Color(hex: "#161618")
 
-    /// Primary text.
-    static var ink: Color {
-        Color(uiColorLightDark: (light: UIColor(white: 0.07, alpha: 1),
-                                 dark: UIColor(white: 0.96, alpha: 1)))
-    }
+    /// A slightly lighter inner surface (nested cards, progress tracks).
+    static let surfaceHigh = Color(hex: "#202023")
+
+    /// Primary text — near-white.
+    static let ink = Color(hex: "#F5F5F7")
 
     /// Secondary / muted text.
-    static var inkMuted: Color {
-        Color(uiColorLightDark: (light: UIColor(white: 0.45, alpha: 1),
-                                 dark: UIColor(white: 0.62, alpha: 1)))
-    }
+    static let inkMuted = Color(hex: "#8A8A8F")
 
-    /// Empty/uncompleted dot or hairline.
-    static var faint: Color {
-        Color(uiColorLightDark: (light: UIColor(white: 0.83, alpha: 1),
-                                 dark: UIColor(white: 0.28, alpha: 1)))
-    }
+    /// Empty/uncompleted dot, hairline, or unfilled track.
+    static let faint = Color(hex: "#2A2A2E")
 
     // MARK: Type — big, bold, condensed-feeling
 
@@ -68,13 +56,13 @@ enum GlowTheme {
 
     // MARK: Metrics
 
-    static let cornerRadius: CGFloat = 16
-    static let cardPadding: CGFloat = 16
+    static let cornerRadius: CGFloat = 24
+    static let cardPadding: CGFloat = 18
 }
 
 // MARK: - Reusable components
 
-/// A minimal panel surface with a hairline separator feel.
+/// A dark bento card surface.
 struct GlowPanel<Content: View>: View {
     var content: Content
     init(@ViewBuilder content: () -> Content) { self.content = content() }
@@ -83,6 +71,28 @@ struct GlowPanel<Content: View>: View {
             .padding(GlowTheme.cardPadding)
             .background(GlowTheme.surface)
             .clipShape(RoundedRectangle(cornerRadius: GlowTheme.cornerRadius, style: .continuous))
+    }
+}
+
+/// A circular progress ring (used on bento stat cards, like the references).
+struct ProgressRing: View {
+    var progress: Double          // 0...1
+    var lineWidth: CGFloat = 4
+    var label: String? = nil      // centered text, e.g. "1"
+    var tint: AnyShapeStyle = AnyShapeStyle(GlowTheme.accentGradient)
+
+    var body: some View {
+        ZStack {
+            Circle().stroke(GlowTheme.faint, lineWidth: lineWidth)
+            Circle()
+                .trim(from: 0, to: max(0.001, min(1, progress)))
+                .stroke(tint, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
+                .rotationEffect(.degrees(-90))
+            if let label {
+                Text(label).font(.system(size: 16, weight: .bold, design: .rounded))
+                    .foregroundStyle(GlowTheme.ink)
+            }
+        }
     }
 }
 
@@ -95,7 +105,7 @@ struct GlowDot: View {
         Group {
             switch state {
             case .empty:  Circle().fill(GlowTheme.faint)
-            case .filled: Circle().fill(GlowTheme.ink)
+            case .filled: Circle().fill(GlowTheme.ink.opacity(0.85))
             case .today:  Circle().fill(GlowTheme.accentGradient)
             }
         }

@@ -21,6 +21,7 @@ struct GlowApp: App {
         WindowGroup {
             RootView()
                 .tint(GlowTheme.accent)
+                .preferredColorScheme(.dark)
         }
         .modelContainer(container)
     }

@@ -42,11 +42,15 @@ struct DNAInsightsView: View {
                         emptyState
                     }
 
-                    Label("Derived on this device from your DNA file. Raw genetic data is never stored or uploaded.",
-                          systemImage: "lock.shield.fill")
-                        .font(GlowTheme.caption())
-                        .foregroundStyle(GlowTheme.inkMuted)
-                        .padding(.top, 4)
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label("Derived on this device from your DNA file. Raw genetic data is never stored or uploaded.",
+                              systemImage: "lock.shield.fill")
+                        Label("Wellness insights only — not medical or diagnostic advice. Genes are predispositions, not destiny. Talk to a professional before major changes.",
+                              systemImage: "stethoscope")
+                    }
+                    .font(GlowTheme.caption())
+                    .foregroundStyle(GlowTheme.inkMuted)
+                    .padding(.top, 4)
                 }
                 .padding(20)
             }
@@ -289,6 +293,8 @@ struct GenomeMapView: View {
         GlowPanel {
             VStack(alignment: .leading, spacing: 14) {
                 Text("GENOME MAP")
+                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                Text("Marker positions are approximate (illustrative, not to scale).")
                     .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
                 ForEach(chromosomes, id: \.self) { chr in
                     let onChr = markers.filter { $0.chromosome == chr }
