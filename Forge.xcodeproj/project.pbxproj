@@ -24,6 +24,7 @@
 		6BD44DF5EDA1396D65BBAB7F /* GlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF8ABD2D03DBFDD385C368 /* GlowApp.swift */; };
 		6F4CB9ABA5F0D9428869C46B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D82A40972609BE5B64925B3C /* Assets.xcassets */; };
 		7818CEB07DBD388AA52E7B97 /* WatchTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5E63084A11FE7DA12C86F /* WatchTodayView.swift */; };
+		8C48F36B7A6177F61BF1EBB4 /* ExerciseFigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D94D4D82780EA95BE55042 /* ExerciseFigure.swift */; };
 		8DE75CBBAED5A450CC594B62 /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E38F3F45E856BED97F187A /* RoutineListView.swift */; };
 		93BA021775AC6501A9B2AA90 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E14CC2A1677F706B152395 /* WelcomeView.swift */; };
 		AA0C702B7D42D652DBC857A3 /* RoutineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */; };
@@ -67,6 +68,7 @@
 		16E38F3F45E856BED97F187A /* RoutineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListView.swift; sourceTree = "<group>"; };
 		1F578C08607E838EE3803FB5 /* ProgressView_Glow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView_Glow.swift; sourceTree = "<group>"; };
 		22B0A67DFD89A8755B6BDA77 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		26D94D4D82780EA95BE55042 /* ExerciseFigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFigure.swift; sourceTree = "<group>"; };
 		2B61EB89A6E2875B55709449 /* NutritionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionView.swift; sourceTree = "<group>"; };
 		3BD2E63488DD8CCBD2623030 /* HealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
 		3C4F6319A9DB13A31FB362B9 /* ExerciseLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibrary.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		77FA31DA4728525346C9E989 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				26D94D4D82780EA95BE55042 /* ExerciseFigure.swift */,
 				506F3C9A8EA91F4160FDF4E9 /* Theme.swift */,
 			);
 			path = Resources;
@@ -321,6 +324,7 @@
 				22C5C6A205C208EB07196138 /* DNAImporter.swift in Sources */,
 				BA39F19BAD0871C12740391E /* DNAInsightsView.swift in Sources */,
 				59F3FDD42D591733668B0496 /* DateHeader.swift in Sources */,
+				8C48F36B7A6177F61BF1EBB4 /* ExerciseFigure.swift in Sources */,
 				4CB391AAAC6C6212FE20FA02 /* ExerciseLibrary.swift in Sources */,
 				6BD44DF5EDA1396D65BBAB7F /* GlowApp.swift in Sources */,
 				4A4B8EBBED0DA08CCF6419EF /* HealthService.swift in Sources */,

@@ -19,25 +19,25 @@ enum GlowTheme {
     /// Flat accent for text / small marks.
     static let accent = teal
 
-    // MARK: Dark-first surfaces (forced dark regardless of system setting)
+    // MARK: Pure-black bento surfaces (forced dark regardless of system setting)
 
-    /// Page background — near-black.
-    static let background = Color(hex: "#0B0B0C")
+    /// Page background — true black (matches the reference).
+    static let background = Color(hex: "#000000")
 
     /// Raised bento card / panel.
-    static let surface = Color(hex: "#161618")
+    static let surface = Color(hex: "#141414")
 
     /// A slightly lighter inner surface (nested cards, progress tracks).
-    static let surfaceHigh = Color(hex: "#202023")
+    static let surfaceHigh = Color(hex: "#1E1E1E")
 
-    /// Primary text — near-white.
-    static let ink = Color(hex: "#F5F5F7")
+    /// Primary text — white.
+    static let ink = Color(hex: "#FFFFFF")
 
     /// Secondary / muted text.
-    static let inkMuted = Color(hex: "#8A8A8F")
+    static let inkMuted = Color(hex: "#7C7C80")
 
     /// Empty/uncompleted dot, hairline, or unfilled track.
-    static let faint = Color(hex: "#2A2A2E")
+    static let faint = Color(hex: "#2C2C2E")
 
     // MARK: Type — big, bold, condensed-feeling
 

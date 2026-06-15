@@ -74,6 +74,15 @@ struct RoutineDetailView: View {
             HStack(spacing: 12) {
                 Image(systemName: checked.contains(step.persistentModelID) ? "checkmark.circle.fill" : "circle")
                     .foregroundStyle(checked.contains(step.persistentModelID) ? GlowTheme.accent : GlowTheme.faint)
+                // Exercise figure — a workout symbol illustrating the movement.
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(GlowTheme.surfaceHigh)
+                        .frame(width: 46, height: 46)
+                    Image(systemName: ExerciseFigure.symbol(for: step.title))
+                        .font(.system(size: 22, weight: .regular))
+                        .foregroundStyle(GlowTheme.accent)
+                }
                 VStack(alignment: .leading, spacing: 2) {
                     Text(step.title)
                         .font(GlowTheme.headline(15))
