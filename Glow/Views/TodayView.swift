@@ -123,7 +123,7 @@ struct TodayView: View {
             .background(GlowTheme.surface)
             .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
         }
-        .buttonStyle(.plain)
+        .pressable()
     }
 
     private var streakCard: some View {
@@ -220,7 +220,7 @@ struct TodayView: View {
                 .background(GlowTheme.surface)
                 .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         }
-        .buttonStyle(.plain)
+        .pressable()
     }
 }
 

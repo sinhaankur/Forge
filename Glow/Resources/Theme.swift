@@ -165,6 +165,30 @@ struct GlowButton: View {
     }
 }
 
+// MARK: - Micro-interactions
+
+/// A button style that scales + dims slightly on press and fires a light haptic
+/// — makes taps feel responsive across the app.
+struct PressableStyle: ButtonStyle {
+    var scale: CGFloat = 0.96
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? scale : 1)
+            .opacity(configuration.isPressed ? 0.9 : 1)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+            .onChange(of: configuration.isPressed) { _, pressed in
+                if pressed { Haptics.tap() }
+            }
+    }
+}
+
+extension View {
+    /// Apply the pressable micro-interaction to any tappable surface.
+    func pressable(_ scale: CGFloat = 0.96) -> some View {
+        buttonStyle(PressableStyle(scale: scale))
+    }
+}
+
 // MARK: - Color helpers
 
 extension Color {

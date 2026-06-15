@@ -52,7 +52,7 @@ struct RoutineListView: View {
                         Button { editing = routine } label: {
                             RoutineCardView(routine: routine)
                         }
-                        .buttonStyle(.plain)
+                        .pressable()
                     }
                 }
                 .padding(20)

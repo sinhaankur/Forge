@@ -31,6 +31,8 @@ struct GlowApp: App {
 /// Shows the branded loading screen briefly, then the app.
 struct RootContainer: View {
     @State private var loading = true
+    @Environment(\.scenePhase) private var scenePhase
+
     var body: some View {
         ZStack {
             RootView()
@@ -41,9 +43,20 @@ struct RootContainer: View {
             }
         }
         .task {
+            await autoRecordMovement()
             try? await Task.sleep(nanoseconds: 1_300_000_000) // ~1.3s splash
             withAnimation(.easeInOut(duration: 0.4)) { loading = false }
         }
+        .onChange(of: scenePhase) { _, phase in
+            // Auto-record movement whenever the app returns to the foreground.
+            if phase == .active { Task { await autoRecordMovement() } }
+        }
+    }
+
+    /// Pull the latest motion/activity automatically — no manual logging needed.
+    private func autoRecordMovement() async {
+        await MotionService.shared.refreshToday()
+        await MotionService.shared.refreshActivityTimeline()
     }
 }
 
