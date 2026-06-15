@@ -11,6 +11,7 @@ struct TodayView: View {
     @State private var logTarget: Routine?
     @State private var showNew = false
     @State private var showProfile = false
+    @State private var showDNA = false
 
     private var profile: UserProfile? { profiles.first }
 
@@ -34,6 +35,9 @@ struct TodayView: View {
 
                     titleBar
                         .padding(.bottom, 4)
+
+                    // DNA is the core — always visible at the top.
+                    dnaStrip
 
                     // Top row: ring card + big-numeral stat card.
                     LazyVGrid(columns: cols, spacing: 12) {
@@ -65,6 +69,7 @@ struct TodayView: View {
             .sheet(item: $logTarget) { RoutineDetailView(routine: $0) }
             .sheet(isPresented: $showNew) { RoutineEditorView(routine: nil, kind: .fitness) }
             .sheet(isPresented: $showProfile) { ProfileView() }
+            .sheet(isPresented: $showDNA) { DNAInsightsView() }
         }
     }
 
@@ -90,6 +95,48 @@ struct TodayView: View {
                 .background(GlowTheme.surface)
                 .clipShape(Circle())
         }
+    }
+
+    // MARK: DNA strip (always visible — DNA is the core)
+
+    private var dnaTraits: [(String, String)] {
+        guard let p = profile else { return [] }
+        var out: [(String, String)] = []
+        if p.aerobic == .high { out.append(("bolt.heart.fill", "High aerobic")) }
+        else if p.aerobic == .normal { out.append(("heart.fill", "Aerobic: normal")) }
+        if p.caffeine == .fast { out.append(("cup.and.saucer.fill", "Fast caffeine")) }
+        else if p.caffeine == .slow { out.append(("cup.and.saucer", "Slow caffeine")) }
+        if p.carb == .resilient { out.append(("leaf.fill", "Carb-resilient")) }
+        else if p.carb == .sensitive { out.append(("leaf", "Carb-sensitive")) }
+        if p.lactoseTolerant { out.append(("drop.fill", "Dairy OK")) }
+        return out
+    }
+    private var hasDNA: Bool { !dnaTraits.isEmpty }
+
+    private var dnaStrip: some View {
+        Button { hasDNA ? (showDNA = true) : (showProfile = true) } label: {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(spacing: 8) {
+                    Image(systemName: "dna").font(.system(size: 15, weight: .bold)).foregroundStyle(GlowTheme.accent)
+                    Text(hasDNA ? "YOUR DNA" : "ADD YOUR DNA")
+                        .font(GlowTheme.caption()).foregroundStyle(GlowTheme.accent)
+                    Spacer()
+                    Image(systemName: "chevron.right").font(.system(size: 11, weight: .bold)).foregroundStyle(GlowTheme.faint)
+                }
+                if hasDNA {
+                    // Wrapping chips of key traits.
+                    FlexChips(items: dnaTraits)
+                } else {
+                    Text("Import your DNA file to personalize training, fuel & recovery — it stays on your device.")
+                        .font(GlowTheme.body(13)).foregroundStyle(GlowTheme.inkMuted)
+                }
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(GlowTheme.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+        }
+        .pressable()
     }
 
     // MARK: Cards
@@ -274,5 +321,27 @@ private extension Routine {
         let syms = ["", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
         if activeWeekdays.count == 1, let d = activeWeekdays.first { return syms[d] + "s" }
         return activeWeekdays.sorted().map { syms[$0] }.joined(separator: "·")
+    }
+}
+
+/// A simple wrapping row of trait chips (icon + label) for the DNA strip.
+struct FlexChips: View {
+    let items: [(String, String)]
+    var body: some View {
+        // Two-per-row grid keeps it tidy and avoids a custom flow layout.
+        let cols = [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)]
+        LazyVGrid(columns: cols, alignment: .leading, spacing: 8) {
+            ForEach(Array(items.enumerated()), id: \.offset) { _, item in
+                HStack(spacing: 6) {
+                    Image(systemName: item.0).font(.system(size: 11, weight: .bold))
+                    Text(item.1).font(.system(size: 12, weight: .semibold)).lineLimit(1)
+                    Spacer(minLength: 0)
+                }
+                .foregroundStyle(GlowTheme.accent)
+                .padding(.horizontal, 10).padding(.vertical, 7)
+                .background(GlowTheme.accent.opacity(0.12))
+                .clipShape(Capsule())
+            }
+        }
     }
 }
