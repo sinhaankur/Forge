@@ -3,6 +3,19 @@ import Foundation
 import HealthKit
 #endif
 
+/// A lightweight, on-device summary of a recent workout (from Strava, Apple
+/// Watch, or any app that writes to Health). Defined outside the HealthKit
+/// conditional so both build configurations can reference it.
+struct ActivitySummary: Identifiable {
+    let id = UUID()
+    let kind: String          // e.g. "Walking", "Running", "Cycling"
+    let date: Date
+    let minutes: Double
+    let distanceKm: Double
+    let calories: Double
+    let systemImage: String
+}
+
 /// Privacy-first HealthKit access.
 ///
 /// Design principles:
@@ -38,9 +51,11 @@ final class HealthService: ObservableObject {
         var types = Set<HKObjectType>()
         if let energy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) { types.insert(energy) }
         if let steps = HKObjectType.quantityType(forIdentifier: .stepCount) { types.insert(steps) }
+        if let dist = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) { types.insert(dist) }
         types.insert(HKObjectType.workoutType())
         return types
     }
+
 
     private init() {
         isAvailable = HKHealthStore.isHealthDataAvailable()
@@ -82,14 +97,89 @@ final class HealthService: ObservableObject {
         }
     }
 
+    /// Distance walked/run today in kilometers, on-device.
+    func distanceKmToday() async -> Double {
+        await sumQuantityToday(.distanceWalkingRunning, unit: .meterUnit(with: .kilo))
+    }
+
+    /// Distance walked/run over the last 7 days, in kilometers.
+    func distanceKmThisWeek() async -> Double {
+        guard isAvailable, isAuthorized,
+              let type = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning) else { return 0 }
+        let start = Calendar.current.date(byAdding: .day, value: -7, to: Calendar.current.startOfDay(for: .now))!
+        let predicate = HKQuery.predicateForSamples(withStart: start, end: .now)
+        return await withCheckedContinuation { cont in
+            let q = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: predicate,
+                                      options: .cumulativeSum) { _, stats, _ in
+                cont.resume(returning: stats?.sumQuantity()?.doubleValue(for: .meterUnit(with: .kilo)) ?? 0)
+            }
+            store.execute(q)
+        }
+    }
+
+    /// The most recent workouts (walks/runs/rides etc.) from any Health source,
+    /// including Strava. Returns up to `limit`, newest first. On-device only.
+    func recentActivities(limit: Int = 10) async -> [ActivitySummary] {
+        guard isAvailable, isAuthorized else { return [] }
+        let sort = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        return await withCheckedContinuation { cont in
+            let q = HKSampleQuery(sampleType: .workoutType(), predicate: nil,
+                                  limit: limit, sortDescriptors: [sort]) { _, samples, _ in
+                let workouts = (samples as? [HKWorkout]) ?? []
+                let summaries = workouts.map { w in
+                    ActivitySummary(
+                        kind: Self.name(for: w.workoutActivityType),
+                        date: w.endDate,
+                        minutes: w.duration / 60,
+                        distanceKm: w.totalDistance?.doubleValue(for: .meterUnit(with: .kilo)) ?? 0,
+                        calories: w.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0,
+                        systemImage: Self.icon(for: w.workoutActivityType)
+                    )
+                }
+                cont.resume(returning: summaries)
+            }
+            store.execute(q)
+        }
+    }
+
     /// Suggest an achieved value for a routine's target metric from Health data,
     /// so the user doesn't have to type it. Returns 0 when not derivable.
     func suggestedAchievedValue(for metric: TargetMetric) async -> Double {
         switch metric {
         case .calories: return await activeEnergyToday()
         case .durationMin: return await workoutMinutesToday()
-        case .distanceKm: return 0 // could read distanceWalkingRunning; left manual for now
+        case .distanceKm: return await distanceKmToday()
         case .reps, .weightKg: return 0 // not available from Health; manual entry
+        }
+    }
+
+    private static func name(for type: HKWorkoutActivityType) -> String {
+        switch type {
+        case .walking: return "Walking"
+        case .running: return "Running"
+        case .cycling: return "Cycling"
+        case .hiking: return "Hiking"
+        case .swimming: return "Swimming"
+        case .rowing: return "Rowing"
+        case .traditionalStrengthTraining, .functionalStrengthTraining: return "Strength"
+        case .highIntensityIntervalTraining: return "HIIT"
+        case .yoga: return "Yoga"
+        default: return "Workout"
+        }
+    }
+
+    private static func icon(for type: HKWorkoutActivityType) -> String {
+        switch type {
+        case .walking: return "figure.walk"
+        case .running: return "figure.run"
+        case .cycling: return "bicycle"
+        case .hiking: return "figure.hiking"
+        case .swimming: return "figure.pool.swim"
+        case .rowing: return "figure.rower"
+        case .traditionalStrengthTraining, .functionalStrengthTraining: return "dumbbell.fill"
+        case .highIntensityIntervalTraining: return "flame.fill"
+        case .yoga: return "figure.yoga"
+        default: return "figure.mixed.cardio"
         }
     }
 
@@ -112,6 +202,9 @@ final class HealthService: ObservableObject {
     func activeEnergyToday() async -> Double { 0 }
     func stepsToday() async -> Double { 0 }
     func workoutMinutesToday() async -> Double { 0 }
+    func distanceKmToday() async -> Double { 0 }
+    func distanceKmThisWeek() async -> Double { 0 }
+    func recentActivities(limit: Int = 10) async -> [ActivitySummary] { [] }
     func suggestedAchievedValue(for metric: TargetMetric) async -> Double { 0 }
     #endif
 }

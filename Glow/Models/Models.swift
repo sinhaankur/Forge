@@ -333,6 +333,30 @@ enum CarbResponse: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+enum VitaminDTendency: String, Codable, CaseIterable, Identifiable {
+    case unknown, normal, lower
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .unknown: return "Not set"
+        case .normal: return "Normal vitamin D"
+        case .lower: return "Tends to run low"
+        }
+    }
+}
+
+enum B12Methylation: String, Codable, CaseIterable, Identifiable {
+    case unknown, efficient, reduced
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .unknown: return "Not set"
+        case .efficient: return "Efficient methylation"
+        case .reduced: return "Reduced methylation"
+        }
+    }
+}
+
 /// Single-row profile capturing the metrics needed to personalize CrossFit plans.
 @Model
 final class UserProfile {
@@ -349,6 +373,8 @@ final class UserProfile {
     var caffeineRaw: String
     var carbRaw: String
     var lactoseTolerant: Bool
+    var vitaminDRaw: String = VitaminDTendency.unknown.rawValue
+    var b12Raw: String = B12Methylation.unknown.rawValue
 
     init(
         heightCm: Double = 175,
@@ -361,7 +387,9 @@ final class UserProfile {
         aerobic: AerobicResponse = .unknown,
         caffeine: CaffeineMetabolism = .unknown,
         carb: CarbResponse = .unknown,
-        lactoseTolerant: Bool = false
+        lactoseTolerant: Bool = false,
+        vitaminD: VitaminDTendency = .unknown,
+        b12: B12Methylation = .unknown
     ) {
         self.heightCm = heightCm
         self.weightKg = weightKg
@@ -374,6 +402,8 @@ final class UserProfile {
         self.caffeineRaw = caffeine.rawValue
         self.carbRaw = carb.rawValue
         self.lactoseTolerant = lactoseTolerant
+        self.vitaminDRaw = vitaminD.rawValue
+        self.b12Raw = b12.rawValue
     }
 
     var aerobic: AerobicResponse {
@@ -387,6 +417,14 @@ final class UserProfile {
     var carb: CarbResponse {
         get { CarbResponse(rawValue: carbRaw) ?? .unknown }
         set { carbRaw = newValue.rawValue }
+    }
+    var vitaminD: VitaminDTendency {
+        get { VitaminDTendency(rawValue: vitaminDRaw) ?? .unknown }
+        set { vitaminDRaw = newValue.rawValue }
+    }
+    var b12: B12Methylation {
+        get { B12Methylation(rawValue: b12Raw) ?? .unknown }
+        set { b12Raw = newValue.rawValue }
     }
 
     var bodyShape: BodyShape {

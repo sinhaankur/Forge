@@ -9,6 +9,8 @@ struct ProgressView_Glow: View {
     @StateObject private var health = HealthService.shared
     @State private var activeEnergy: Double = 0
     @State private var steps: Double = 0
+    @State private var weekDistance: Double = 0
+    @State private var activities: [ActivitySummary] = []
     @State private var showPrivacy = false
 
     private var streak: Int { RoutineStore.currentStreak(in: context) }
@@ -49,13 +51,19 @@ struct ProgressView_Glow: View {
                                      systemImage: "bolt.heart.fill", style: .light)
                             StatCard(label: "Steps Today", value: "\(Int(steps))", unit: "",
                                      systemImage: "figure.walk", style: .light)
+                            StatCard(label: "Distance · 7d", value: String(format: "%.1f", weekDistance), unit: "km",
+                                     systemImage: "map.fill", style: .accent)
                         }
+                    }
+
+                    if !activities.isEmpty {
+                        ActivitiesPanel(activities: activities)
                     }
 
                     ConsistencyCalendar(completedDays: RoutineStore.completedDays(in: context))
 
                     Button { showPrivacy = true } label: {
-                        Label("How Glow handles your health data", systemImage: "lock.shield.fill")
+                        Label("How Forge handles your health data", systemImage: "lock.shield.fill")
                             .font(GlowTheme.caption())
                             .foregroundStyle(GlowTheme.inkMuted)
                     }
@@ -70,6 +78,49 @@ struct ProgressView_Glow: View {
                 await health.requestAuthorization()
                 activeEnergy = await health.activeEnergyToday()
                 steps = await health.stepsToday()
+                weekDistance = await health.distanceKmThisWeek()
+                activities = await health.recentActivities(limit: 8)
+            }
+        }
+    }
+}
+
+/// Recent activities pulled from Apple Health (Strava walks/runs/rides, Apple
+/// Watch workouts, etc.) — read on-device, never uploaded.
+struct ActivitiesPanel: View {
+    let activities: [ActivitySummary]
+
+    private static let dateFmt: DateFormatter = {
+        let f = DateFormatter(); f.dateFormat = "EEE d"; return f
+    }()
+
+    var body: some View {
+        GlowPanel {
+            VStack(alignment: .leading, spacing: 12) {
+                Label("RECENT ACTIVITY", systemImage: "figure.run")
+                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                ForEach(activities) { a in
+                    HStack(spacing: 12) {
+                        Image(systemName: a.systemImage)
+                            .font(.system(size: 16))
+                            .foregroundStyle(GlowTheme.accent)
+                            .frame(width: 24)
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(a.kind).font(GlowTheme.headline(15)).foregroundStyle(GlowTheme.ink)
+                            Text(Self.dateFmt.string(from: a.date))
+                                .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                        }
+                        Spacer()
+                        VStack(alignment: .trailing, spacing: 1) {
+                            if a.distanceKm > 0 {
+                                Text(String(format: "%.1f km", a.distanceKm))
+                                    .font(GlowTheme.headline(14)).foregroundStyle(GlowTheme.ink)
+                            }
+                            Text("\(Int(a.minutes)) min · \(Int(a.calories)) kcal")
+                                .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                        }
+                    }
+                }
             }
         }
     }

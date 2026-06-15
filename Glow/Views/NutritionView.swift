@@ -115,6 +115,14 @@ struct NutritionView: View {
             tips.append(("bolt.fill",
                 "Fast caffeine metabolizer: a black coffee 30–45 min pre-workout gives a clean boost without disrupting sleep."))
         }
+        if p.vitaminD == .lower {
+            tips.append(("sun.max.fill",
+                "Vitamin D tends to run low for you: prioritize sun, fatty fish, eggs, and consider testing levels with your doctor."))
+        }
+        if p.b12 == .reduced {
+            tips.append(("pills.fill",
+                "Reduced methylation: favor B12/folate-rich foods (eggs, dairy, leafy greens); methylated B-vitamin forms may suit you better."))
+        }
         return tips
     }
 

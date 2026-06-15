@@ -19,7 +19,10 @@ struct ProfileView: View {
     @State private var caffeine: CaffeineMetabolism = .unknown
     @State private var carb: CarbResponse = .unknown
     @State private var lactoseTolerant = false
+    @State private var vitaminD: VitaminDTendency = .unknown
+    @State private var b12: B12Methylation = .unknown
     @State private var generated = false
+    @State private var showImporter = false
 
     private var bmi: Double {
         let m = heightCm / 100
@@ -62,15 +65,16 @@ struct ProfileView: View {
                 }
 
                 Section("Genetic insights (optional)") {
-                    Text("If you know these from a DNA report, Forge tunes your plan. Stored only on this device — never uploaded.")
+                    Text("Upload a raw DNA file (23andMe / AncestryDNA) and Forge reads the relevant markers on this device. Or set them manually. Nothing is uploaded — the file is parsed locally and not stored.")
                         .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
                     Button {
-                        // Quick-apply: the endurance-leaning, dairy-friendly,
-                        // carb-resilient, fast-caffeine profile.
-                        aerobic = .high
-                        caffeine = .fast
-                        carb = .resilient
-                        lactoseTolerant = true
+                        showImporter = true
+                    } label: {
+                        Label("Upload DNA / CSV file", systemImage: "square.and.arrow.up")
+                    }
+                    Button {
+                        // Quick-apply demo markers (endurance-leaning, dairy-friendly).
+                        aerobic = .high; caffeine = .fast; carb = .resilient; lactoseTolerant = true
                     } label: {
                         Label("Apply my DNA markers", systemImage: "sparkles")
                     }
@@ -84,6 +88,12 @@ struct ProfileView: View {
                         ForEach(CarbResponse.allCases) { Text($0.title).tag($0) }
                     }
                     Toggle("Lactose tolerant (dairy OK)", isOn: $lactoseTolerant)
+                    Picker("Vitamin D", selection: $vitaminD) {
+                        ForEach(VitaminDTendency.allCases) { Text($0.title).tag($0) }
+                    }
+                    Picker("B12 methylation", selection: $b12) {
+                        ForEach(B12Methylation.allCases) { Text($0.title).tag($0) }
+                    }
                 }
 
                 Section {
@@ -103,7 +113,43 @@ struct ProfileView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { save(); dismiss() } } }
             .onAppear(perform: load)
+            .fileImporter(
+                isPresented: $showImporter,
+                allowedContentTypes: DNAImporter.allowedTypes,
+                allowsMultipleSelection: false
+            ) { result in
+                handleImport(result)
+            }
+            .alert("DNA imported", isPresented: $importAlert) {
+                Button("OK") {}
+            } message: { Text(importMessage) }
         }
+    }
+
+    @State private var importAlert = false
+    @State private var importMessage = ""
+
+    private func handleImport(_ result: Result<[URL], Error>) {
+        guard case let .success(urls) = result, let url = urls.first else { return }
+        // Security-scoped access for the user-picked file.
+        let scoped = url.startAccessingSecurityScopedResource()
+        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        guard let text = try? String(contentsOf: url, encoding: .utf8) else {
+            importMessage = "Couldn't read that file. Make sure it's the raw DNA text/CSV export."
+            importAlert = true
+            return
+        }
+        let traits = DNAImporter.parse(text)
+        // Apply only the traits we could derive; leave others untouched.
+        if let a = traits.aerobic { aerobic = a }
+        if let c = traits.caffeine { caffeine = c }
+        if let cb = traits.carb { carb = cb }
+        if let l = traits.lactoseTolerant { lactoseTolerant = l }
+        if let vd = traits.vitaminD { vitaminD = vd }
+        if let b = traits.b12 { b12 = b }
+        save()
+        importMessage = traits.summary
+        importAlert = true
     }
 
     private func currentProfile() -> UserProfile {
@@ -121,6 +167,7 @@ struct ProfileView: View {
         daysPerWeek = p.daysPerWeek
         aerobic = p.aerobic; caffeine = p.caffeine
         carb = p.carb; lactoseTolerant = p.lactoseTolerant
+        vitaminD = p.vitaminD; b12 = p.b12
     }
 
     private func save() {
@@ -131,6 +178,7 @@ struct ProfileView: View {
         p.daysPerWeek = daysPerWeek
         p.aerobic = aerobic; p.caffeine = caffeine
         p.carb = carb; p.lactoseTolerant = lactoseTolerant
+        p.vitaminD = vitaminD; p.b12 = b12
         try? context.save()
     }
 
