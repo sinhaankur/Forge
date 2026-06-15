@@ -13,6 +13,7 @@ struct RoutineDetailView: View {
     @Query private var profiles: [UserProfile]
     @State private var checked: Set<PersistentIdentifier> = []
     @State private var achieved = ""
+    @State private var howToStep: RoutineStep?
 
     private var boosts: [HormoneInsight.Boost] {
         HormoneInsight.boosts(for: routine, profile: profiles.first)
@@ -64,6 +65,9 @@ struct RoutineDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } }
             }
+            .sheet(item: $howToStep) { step in
+                ExerciseDetailView(stepTitle: step.title, summary: step.summary)
+            }
             .task {
                 if routine.hasTarget, let m = routine.targetMetric, achieved.isEmpty {
                     let suggested = await health.suggestedAchievedValue(for: m)
@@ -100,6 +104,12 @@ struct RoutineDetailView: View {
                     }
                 }
                 Spacer()
+                // "How to do it" — opens the form guide for this movement.
+                Button { howToStep = step } label: {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 18)).foregroundStyle(GlowTheme.inkMuted)
+                }
+                .buttonStyle(.plain)
             }
             .padding(.horizontal, 16).padding(.vertical, 12)
             .contentShape(Rectangle())

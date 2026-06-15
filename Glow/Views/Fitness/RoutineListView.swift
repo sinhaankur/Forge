@@ -9,6 +9,7 @@ struct RoutineListView: View {
     @State private var editing: Routine?
     @State private var showingNew = false
     @State private var showingProfile = false
+    @State private var showingSmartAdd = false
 
     private var filtered: [Routine] {
         routines.filter { $0.kind == kind }.sorted { $0.createdAt < $1.createdAt }
@@ -49,6 +50,11 @@ struct RoutineListView: View {
                         }
                     }
                 }
+                if kind == .fitness {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button { showingSmartAdd = true } label: { Image(systemName: "wand.and.stars") }
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { showingNew = true } label: { Image(systemName: "plus") }
                 }
@@ -61,6 +67,9 @@ struct RoutineListView: View {
             }
             .sheet(isPresented: $showingProfile) {
                 ProfileView()
+            }
+            .sheet(isPresented: $showingSmartAdd) {
+                SmartAddView(onCreated: { editing = $0 })
             }
         }
     }
