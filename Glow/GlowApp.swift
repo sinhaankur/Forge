@@ -41,6 +41,9 @@ struct RootView: View {
             RoutineListView(kind: .fitness)
                 .tabItem { Label("Fitness", systemImage: "figure.strengthtraining.traditional") }
 
+            SleepView()
+                .tabItem { Label("Sleep", systemImage: "moon.stars.fill") }
+
             RoutineListView(kind: .skincare)
                 .tabItem { Label("Skincare", systemImage: "drop.fill") }
 

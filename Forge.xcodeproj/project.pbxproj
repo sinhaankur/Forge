@@ -16,6 +16,8 @@
 		490237B29D41D72FC6BFDF8B /* ConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3237A42A929FCE680185A5 /* ConnectivityService.swift */; };
 		4A4B8EBBED0DA08CCF6419EF /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2E63488DD8CCBD2623030 /* HealthService.swift */; };
 		4CB391AAAC6C6212FE20FA02 /* ExerciseLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F6319A9DB13A31FB362B9 /* ExerciseLibrary.swift */; };
+		4D0E2ADAC9AE127A2AD08383 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073CF4BD34BA2A0BF46F5170 /* SleepView.swift */; };
+		51324A23191004C6E42FB4E5 /* SleepStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758D429FB8AEDB062CAC8F0E /* SleepStore.swift */; };
 		524CAC818E4DF5F92B9DEAE4 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B0A67DFD89A8755B6BDA77 /* TodayView.swift */; };
 		57A7F33C149F14DAD690C05D /* GlowWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 51E636296A862020AC334545 /* GlowWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		59F3FDD42D591733668B0496 /* DateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE39121B0C54C21AA321A84 /* DateHeader.swift */; };
@@ -65,6 +67,7 @@
 
 /* Begin PBXFileReference section */
 		0305FA0EEEBED8FD4077B34F /* RoutineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailView.swift; sourceTree = "<group>"; };
+		073CF4BD34BA2A0BF46F5170 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		16204BD1647BF64DD02CA257 /* SeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedData.swift; sourceTree = "<group>"; };
 		16E38F3F45E856BED97F187A /* RoutineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListView.swift; sourceTree = "<group>"; };
 		1F578C08607E838EE3803FB5 /* ProgressView_Glow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView_Glow.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		51E636296A862020AC334545 /* GlowWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlowWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineStore.swift; sourceTree = "<group>"; };
 		6E3237A42A929FCE680185A5 /* ConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityService.swift; sourceTree = "<group>"; };
+		758D429FB8AEDB062CAC8F0E /* SleepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepStore.swift; sourceTree = "<group>"; };
 		873682C642D8FE4D265FFD1E /* DNAInsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAInsightsView.swift; sourceTree = "<group>"; };
 		929706BF2C22B4E63476C216 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9D01F0DDB92F4A48EDAF0298 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 				EC36222163248A94522BA5E4 /* NotificationService.swift */,
 				6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */,
 				16204BD1647BF64DD02CA257 /* SeedData.swift */,
+				758D429FB8AEDB062CAC8F0E /* SleepStore.swift */,
 				A072DEA4E412DFD928FC8390 /* WorkoutGenerator.swift */,
 			);
 			path = Services;
@@ -210,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				2B61EB89A6E2875B55709449 /* NutritionView.swift */,
+				073CF4BD34BA2A0BF46F5170 /* SleepView.swift */,
 				22B0A67DFD89A8755B6BDA77 /* TodayView.swift */,
 				51E14CC2A1677F706B152395 /* WelcomeView.swift */,
 				7DD4AE7D7E16933F66F347AC /* Fitness */,
@@ -342,6 +348,8 @@
 				8DE75CBBAED5A450CC594B62 /* RoutineListView.swift in Sources */,
 				AA0C702B7D42D652DBC857A3 /* RoutineStore.swift in Sources */,
 				60D7BE8C99F9142CF0908A77 /* SeedData.swift in Sources */,
+				51324A23191004C6E42FB4E5 /* SleepStore.swift in Sources */,
+				4D0E2ADAC9AE127A2AD08383 /* SleepView.swift in Sources */,
 				1DE8CC05014E1AE135716EA3 /* Theme.swift in Sources */,
 				524CAC818E4DF5F92B9DEAE4 /* TodayView.swift in Sources */,
 				93BA021775AC6501A9B2AA90 /* WelcomeView.swift in Sources */,

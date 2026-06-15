@@ -41,6 +41,9 @@ struct TodayView: View {
                         streakCard
                     }
 
+                    // Daily readiness (sleep + recovery + consistency).
+                    readinessRow
+
                     // Wide dot-calendar card with a docked routine row.
                     calendarCard
 
@@ -164,6 +167,26 @@ struct TodayView: View {
             }
         }
         .padding(16)
+        .background(GlowTheme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
+    }
+
+    private var readinessRow: some View {
+        let r = SleepStore.readiness(in: context)
+        return HStack(spacing: 14) {
+            ZStack {
+                ProgressRing(progress: Double(r.score) / 100, lineWidth: 4)
+                    .frame(width: 46, height: 46)
+                Text("\(r.score)").font(.system(size: 15, weight: .heavy)).foregroundStyle(GlowTheme.ink)
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Readiness · \(r.label)")
+                    .font(.system(size: 16, weight: .semibold)).foregroundStyle(GlowTheme.ink)
+                Text(r.advice).font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted).lineLimit(2)
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 18).padding(.vertical, 16)
         .background(GlowTheme.surface)
         .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
     }
