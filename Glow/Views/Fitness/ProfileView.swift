@@ -28,6 +28,7 @@ struct ProfileView: View {
     @State private var generated = false
     @State private var showImporter = false
     @State private var showDNAInsights = false
+    @State private var showAbout = false
 
     private var bmi: Double {
         let m = heightCm / 100
@@ -137,6 +138,12 @@ struct ProfileView: View {
                             .font(GlowTheme.caption()).foregroundStyle(GlowTheme.accent)
                     }
                 }
+
+                Section {
+                    Button { showAbout = true } label: {
+                        Label("About Forge", systemImage: "info.circle")
+                    }
+                }
             }
             .navigationTitle("Your Profile")
             .navigationBarTitleDisplayMode(.inline)
@@ -164,6 +171,7 @@ struct ProfileView: View {
                 Button("OK") {}
             } message: { Text(importMessage) }
             .sheet(isPresented: $showDNAInsights) { DNAInsightsView() }
+            .sheet(isPresented: $showAbout) { AboutView() }
             .overlay {
                 if importing {
                     ZStack {

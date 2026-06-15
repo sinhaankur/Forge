@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01EAF64CD8FD2AF662351119 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D01F0DDB92F4A48EDAF0298 /* Models.swift */; };
 		0544E6EA3465A5D0BBA629DA /* SmartAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A7D2620A9AE240619A305 /* SmartAddView.swift */; };
+		057F7D399627778B51D98A0C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D905E11A79A3F048CD74052D /* AboutView.swift */; };
 		06BE149E6FAC7157D1773C5D /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BD28E2AA7A6170E314E67A /* CalendarService.swift */; };
 		0C3D6CA312074B4679773F32 /* NutritionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61EB89A6E2875B55709449 /* NutritionView.swift */; };
 		0F3AD91A84376BD1B98139F0 /* ProgressView_Glow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F578C08607E838EE3803FB5 /* ProgressView_Glow.swift */; };
@@ -118,6 +119,7 @@
 		BAFB0F2277988707A0641826 /* DNAImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAImporter.swift; sourceTree = "<group>"; };
 		CBC30FB99C682257359F82EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D82A40972609BE5B64925B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D905E11A79A3F048CD74052D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		D9A0B6D6D392864D6D1BD48B /* Glow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Glow.entitlements; sourceTree = "<group>"; };
 		DB2000CF36A7D27D9FD267B9 /* MotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionService.swift; sourceTree = "<group>"; };
 		E430B09C00FC9526B34A6A06 /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		F9BB2C6F542E18E8059919AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D905E11A79A3F048CD74052D /* AboutView.swift */,
 				2B61EB89A6E2875B55709449 /* NutritionView.swift */,
 				073CF4BD34BA2A0BF46F5170 /* SleepView.swift */,
 				22B0A67DFD89A8755B6BDA77 /* TodayView.swift */,
@@ -363,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDD8277B732225A33FF6C365 /* AIService.swift in Sources */,
+				057F7D399627778B51D98A0C /* AboutView.swift in Sources */,
 				06BE149E6FAC7157D1773C5D /* CalendarService.swift in Sources */,
 				490237B29D41D72FC6BFDF8B /* ConnectivityService.swift in Sources */,
 				22C5C6A205C208EB07196138 /* DNAImporter.swift in Sources */,
