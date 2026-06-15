@@ -24,6 +24,10 @@ struct RoutineListView: View {
                         .foregroundStyle(GlowTheme.ink)
                         .padding(.top, 8)
 
+                    if kind == .fitness {
+                        DNABanner(onOpen: { showingProfile = true })
+                    }
+
                     if filtered.isEmpty {
                         if kind == .fitness {
                             EmptyState(
@@ -85,6 +89,52 @@ struct RoutineListView: View {
                 SmartAddView(onCreated: { editing = $0 })
             }
         }
+    }
+}
+
+/// A prominent banner making DNA feel central to the app — shows the user's key
+/// genetic edge if set, or invites them to import their DNA.
+struct DNABanner: View {
+    @Query private var profiles: [UserProfile]
+    var onOpen: () -> Void
+    private var p: UserProfile? { profiles.first }
+    private var hasDNA: Bool {
+        guard let p else { return false }
+        return p.aerobic != .unknown || p.caffeine != .unknown || p.carb != .unknown
+    }
+
+    var body: some View {
+        Button(action: onOpen) {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle().fill(GlowTheme.accent.opacity(0.15)).frame(width: 46, height: 46)
+                    Image(systemName: "dna").font(.system(size: 20, weight: .semibold)).foregroundStyle(GlowTheme.accent)
+                }
+                VStack(alignment: .leading, spacing: 2) {
+                    if hasDNA, let p {
+                        Text("Tuned to your DNA").font(.system(size: 15, weight: .semibold)).foregroundStyle(GlowTheme.ink)
+                        Text(dnaSummary(p)).font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted).lineLimit(1)
+                    } else {
+                        Text("Make it yours — add your DNA").font(.system(size: 15, weight: .semibold)).foregroundStyle(GlowTheme.ink)
+                        Text("Import a DNA file to personalize training & fuel").font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                    }
+                }
+                Spacer()
+                Image(systemName: "chevron.right").font(.system(size: 13, weight: .bold)).foregroundStyle(GlowTheme.faint)
+            }
+            .padding(16)
+            .background(GlowTheme.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func dnaSummary(_ p: UserProfile) -> String {
+        var bits: [String] = []
+        if p.aerobic == .high { bits.append("High aerobic") }
+        if p.caffeine == .fast { bits.append("Fast caffeine") }
+        if p.carb == .resilient { bits.append("Carb-resilient") }
+        return bits.isEmpty ? "View your genetic insights" : bits.joined(separator: " · ")
     }
 }
 
