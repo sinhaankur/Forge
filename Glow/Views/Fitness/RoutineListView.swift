@@ -25,10 +25,23 @@ struct RoutineListView: View {
                         .padding(.top, 8)
 
                     if filtered.isEmpty {
-                        Text("No \(kind.title.lowercased()) routines yet. Tap + to create one.")
-                            .font(GlowTheme.body(15))
-                            .foregroundStyle(GlowTheme.inkMuted)
-                            .padding(.vertical, 30)
+                        if kind == .fitness {
+                            EmptyState(
+                                icon: "figure.strengthtraining.traditional",
+                                title: "No workouts yet",
+                                message: "Tap ✨ to get a workout suggested for right now, generate a personalized plan from your profile, or paste one from any AI.",
+                                actionTitle: "Suggest a workout",
+                                action: { showingSmartAdd = true }
+                            )
+                        } else {
+                            EmptyState(
+                                icon: "drop.fill",
+                                title: "No skincare routines",
+                                message: "Add a morning or evening routine and Forge will remind you to keep it consistent.",
+                                actionTitle: "Add a routine",
+                                action: { showingNew = true }
+                            )
+                        }
                     }
 
                     ForEach(filtered) { routine in

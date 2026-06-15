@@ -18,6 +18,7 @@
 		1ACB7D904818AA77D1980347 /* PlanParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BF2B6C7E72283B4C5EDC6D /* PlanParser.swift */; };
 		1DE8CC05014E1AE135716EA3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F3C9A8EA91F4160FDF4E9 /* Theme.swift */; };
 		22C5C6A205C208EB07196138 /* DNAImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB0F2277988707A0641826 /* DNAImporter.swift */; };
+		3B6D307D2D8A5EC9550B928C /* CareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F26050F2755A8AEBBBA8E5D /* CareView.swift */; };
 		490237B29D41D72FC6BFDF8B /* ConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3237A42A929FCE680185A5 /* ConnectivityService.swift */; };
 		4A4B8EBBED0DA08CCF6419EF /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2E63488DD8CCBD2623030 /* HealthService.swift */; };
 		4CB391AAAC6C6212FE20FA02 /* ExerciseLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F6319A9DB13A31FB362B9 /* ExerciseLibrary.swift */; };
@@ -43,6 +44,7 @@
 		AC82D6203C76ADCA8403658A /* FocusSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71015E750650F46039035837 /* FocusSessionView.swift */; };
 		BA39F19BAD0871C12740391E /* DNAInsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873682C642D8FE4D265FFD1E /* DNAInsightsView.swift */; };
 		D00A7883601D70924829FEF0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2275A20906FE573CA34EA09 /* ProfileView.swift */; };
+		E43362F1B241ED13FD1B1E94 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D02618CD3E819344C8706C /* EmptyState.swift */; };
 		EDD8277B732225A33FF6C365 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E430B09C00FC9526B34A6A06 /* AIService.swift */; };
 		F1337E762A2B75322692A68C /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4714C795A9855014FB6072 /* Haptics.swift */; };
 		F2178C105BBB63166F814303 /* WorkoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072DEA4E412DFD928FC8390 /* WorkoutGenerator.swift */; };
@@ -82,6 +84,7 @@
 		073CF4BD34BA2A0BF46F5170 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		16204BD1647BF64DD02CA257 /* SeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedData.swift; sourceTree = "<group>"; };
 		16E38F3F45E856BED97F187A /* RoutineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListView.swift; sourceTree = "<group>"; };
+		19D02618CD3E819344C8706C /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
 		1F578C08607E838EE3803FB5 /* ProgressView_Glow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView_Glow.swift; sourceTree = "<group>"; };
 		22B0A67DFD89A8755B6BDA77 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		26D94D4D82780EA95BE55042 /* ExerciseFigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFigure.swift; sourceTree = "<group>"; };
@@ -96,6 +99,7 @@
 		51E14CC2A1677F706B152395 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		51E636296A862020AC334545 /* GlowWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlowWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55DCA528D092513CCB18B3B1 /* ExerciseGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGuide.swift; sourceTree = "<group>"; };
+		5F26050F2755A8AEBBBA8E5D /* CareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareView.swift; sourceTree = "<group>"; };
 		6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineStore.swift; sourceTree = "<group>"; };
 		695F2E71C192ECE3CEBD1580 /* PlanAroundDayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanAroundDayCard.swift; sourceTree = "<group>"; };
 		6E3237A42A929FCE680185A5 /* ConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityService.swift; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				ADE39121B0C54C21AA321A84 /* DateHeader.swift */,
+				19D02618CD3E819344C8706C /* EmptyState.swift */,
 				A0F51BBE65034CE6160E8AF3 /* ExerciseDetailView.swift */,
 				71015E750650F46039035837 /* FocusSessionView.swift */,
 				695F2E71C192ECE3CEBD1580 /* PlanAroundDayCard.swift */,
@@ -250,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				D905E11A79A3F048CD74052D /* AboutView.swift */,
+				5F26050F2755A8AEBBBA8E5D /* CareView.swift */,
 				2B61EB89A6E2875B55709449 /* NutritionView.swift */,
 				073CF4BD34BA2A0BF46F5170 /* SleepView.swift */,
 				22B0A67DFD89A8755B6BDA77 /* TodayView.swift */,
@@ -368,10 +374,12 @@
 				EDD8277B732225A33FF6C365 /* AIService.swift in Sources */,
 				057F7D399627778B51D98A0C /* AboutView.swift in Sources */,
 				06BE149E6FAC7157D1773C5D /* CalendarService.swift in Sources */,
+				3B6D307D2D8A5EC9550B928C /* CareView.swift in Sources */,
 				490237B29D41D72FC6BFDF8B /* ConnectivityService.swift in Sources */,
 				22C5C6A205C208EB07196138 /* DNAImporter.swift in Sources */,
 				BA39F19BAD0871C12740391E /* DNAInsightsView.swift in Sources */,
 				59F3FDD42D591733668B0496 /* DateHeader.swift in Sources */,
+				E43362F1B241ED13FD1B1E94 /* EmptyState.swift in Sources */,
 				758CFBA96A8DAA69A4ABAC67 /* ExerciseDetailView.swift in Sources */,
 				8C48F36B7A6177F61BF1EBB4 /* ExerciseFigure.swift in Sources */,
 				9733B81FFED0BCDECAF256EF /* ExerciseGuide.swift in Sources */,

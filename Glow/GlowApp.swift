@@ -44,11 +44,8 @@ struct RootView: View {
             SleepView()
                 .tabItem { Label("Sleep", systemImage: "moon.stars.fill") }
 
-            RoutineListView(kind: .skincare)
-                .tabItem { Label("Skincare", systemImage: "drop.fill") }
-
-            NutritionView()
-                .tabItem { Label("Nutrition", systemImage: "fork.knife") }
+            CareView()
+                .tabItem { Label("Care", systemImage: "heart.fill") }
 
             ProgressView_Glow()
                 .tabItem { Label("Progress", systemImage: "chart.bar.fill") }
