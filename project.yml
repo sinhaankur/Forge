@@ -11,7 +11,7 @@ settings:
     MARKETING_VERSION: "1.0"
     CURRENT_PROJECT_VERSION: "1"
     SWIFT_VERSION: "5.0"
-    DEVELOPMENT_TEAM: "DS8C97S284"  # Ankur Sinha (Personal Team)
+    DEVELOPMENT_TEAM: ""  # Set your own Apple Team ID (or via a local override) for device/TestFlight builds
     CODE_SIGN_STYLE: Automatic
     GENERATE_INFOPLIST_FILE: NO
 

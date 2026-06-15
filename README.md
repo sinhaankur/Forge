@@ -53,7 +53,28 @@ xcodegen generate            # creates Forge.xcodeproj
 open Forge.xcodeproj         # pick the Forge scheme + an iPhone simulator, ⌘R
 ```
 
-See **[SETUP.md](SETUP.md)** for on-device install and TestFlight.
+To run on your own device, set your Apple **Team ID** (`DEVELOPMENT_TEAM` in
+`project.yml`) and a unique bundle-ID prefix, then regenerate. See
+**[SETUP.md](SETUP.md)** for the full on-device install + TestFlight guide.
 
-> Not medical advice. Consult a professional before starting any exercise or
-> nutrition program, especially with existing injuries.
+## Roadmap
+
+- ☑️ iOS app (SwiftUI) + watchOS companion
+- ☑️ DNA file import (23andMe / AncestryDNA / MyHeritage), parsed on-device
+- ☑️ Privacy-first Apple Health activity reading
+- ⏳ **Android app** (Kotlin / Jetpack Compose) — planned next phase
+
+## Privacy
+
+Forge is on-device by design: **no account, no server, no analytics.** Health
+data and genetic traits never leave your phone; this repo contains application
+**code only** — never personal data.
+
+## License
+
+Open source under the [MIT License](LICENSE) — anyone is welcome to use, fork,
+and build Forge.
+
+> Not medical advice. Forge provides general wellness/fitness information only.
+> Consult a professional before starting any exercise or nutrition program,
+> especially with existing injuries.
