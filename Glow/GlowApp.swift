@@ -20,11 +20,30 @@ struct GlowApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootContainer()
                 .tint(GlowTheme.accent)
                 .preferredColorScheme(.dark)
         }
         .modelContainer(container)
+    }
+}
+
+/// Shows the branded loading screen briefly, then the app.
+struct RootContainer: View {
+    @State private var loading = true
+    var body: some View {
+        ZStack {
+            RootView()
+            if loading {
+                LoadingView()
+                    .transition(.opacity)
+                    .zIndex(1)
+            }
+        }
+        .task {
+            try? await Task.sleep(nanoseconds: 1_300_000_000) // ~1.3s splash
+            withAnimation(.easeInOut(duration: 0.4)) { loading = false }
+        }
     }
 }
 
