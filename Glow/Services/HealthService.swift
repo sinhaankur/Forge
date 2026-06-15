@@ -20,12 +20,12 @@ final class HealthService: ObservableObject {
     /// Human-readable summary of exactly what we read and our privacy posture,
     /// shown in the in-app privacy explainer.
     static let privacyStatement = """
-    Glow reads a small amount of health data — active energy, step count, and \
+    Forge reads a small amount of health data — active energy, step count, and \
     workout sessions — only on this device, to automatically fill in how you \
     did against your workout targets and to show your progress stats.
 
     This data never leaves your iPhone. There is no account, no server, and no \
-    analytics. Glow requests read-only access and writes nothing to Health.
+    analytics. Forge requests read-only access and writes nothing to Health.
     """
 
     @Published var isAuthorized = false

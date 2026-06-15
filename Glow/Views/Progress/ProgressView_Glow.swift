@@ -150,7 +150,7 @@ struct ConsistencyCalendar: View {
                 Text("CONSISTENCY")
                     .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
                 HStack {
-                    ForEach(["M","T","W","T","F","S","S"], id: \.self) { d in
+                    ForEach(Array(["M","T","W","T","F","S","S"].enumerated()), id: \.offset) { _, d in
                         Text(d).font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
                             .frame(maxWidth: .infinity)
                     }

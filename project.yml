@@ -1,6 +1,6 @@
-name: Glow
+name: Forge
 options:
-  bundleIdPrefix: com.sinhaankur.glow
+  bundleIdPrefix: com.sinhaankur.forge
   deploymentTarget:
     iOS: "17.0"
     watchOS: "10.0"
@@ -27,8 +27,11 @@ targets:
         embed: true
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.sinhaankur.glow
-        CODE_SIGN_ENTITLEMENTS: Glow/Glow.entitlements
+        PRODUCT_NAME: Forge
+        PRODUCT_BUNDLE_IDENTIFIER: com.sinhaankur.forge
+        # HealthKit entitlement disabled for free-account direct install.
+        # Re-enable for TestFlight (paid account): uncomment the line below.
+        # CODE_SIGN_ENTITLEMENTS: Glow/Glow.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         TARGETED_DEVICE_FAMILY: "1,2"
@@ -36,11 +39,12 @@ targets:
     info:
       path: Glow/Info.plist
       properties:
+        CFBundleDisplayName: Forge
         UILaunchScreen: {}
         UIApplicationSceneManifest:
           UIApplicationSupportsMultipleScenes: true
-        NSHealthShareUsageDescription: "Glow reads your active energy, steps, and workouts on this device to fill in workout-target progress and show your stats. This data never leaves your iPhone."
-        NSHealthUpdateUsageDescription: "Glow does not write any data to Health. It only reads, on your device."
+        NSHealthShareUsageDescription: "Forge reads your active energy, steps, and workouts on this device to fill in workout-target progress and show your stats. This data never leaves your iPhone."
+        NSHealthUpdateUsageDescription: "Forge does not write any data to Health. It only reads, on your device."
 
   # ---------------- watchOS app ----------------
   GlowWatch:
@@ -52,17 +56,19 @@ targets:
       - path: Glow/Services/ConnectivityService.swift
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.sinhaankur.glow.watchkitapp
+        PRODUCT_NAME: Forge
+        PRODUCT_BUNDLE_IDENTIFIER: com.sinhaankur.forge.watchkitapp
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         TARGETED_DEVICE_FAMILY: "4"
     info:
       path: GlowWatch/Info.plist
       properties:
+        CFBundleDisplayName: Forge
         WKApplication: true
-        WKCompanionAppBundleIdentifier: com.sinhaankur.glow
+        WKCompanionAppBundleIdentifier: com.sinhaankur.forge
 
 schemes:
-  Glow:
+  Forge:
     build:
       targets:
         Glow: all

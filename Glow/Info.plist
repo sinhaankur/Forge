@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Forge</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -19,9 +21,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Glow reads your active energy, steps, and workouts on this device to fill in workout-target progress and show your stats. This data never leaves your iPhone.</string>
+	<string>Forge reads your active energy, steps, and workouts on this device to fill in workout-target progress and show your stats. This data never leaves your iPhone.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Glow does not write any data to Health. It only reads, on your device.</string>
+	<string>Forge does not write any data to Health. It only reads, on your device.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

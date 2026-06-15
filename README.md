@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="Branding/glow-icon-512.png" width="120" alt="Glow icon">
+  <img src="Branding/glow-icon-512.png" width="120" alt="Forge icon">
 </p>
 
-<h1 align="center">Glow</h1>
-<p align="center"><em>Show up. Glow up.</em></p>
+<h1 align="center">Forge</h1>
+<p align="center"><em>Built daily.</em></p>
 
-Glow is a private, **on-device** iOS + Apple Watch app for personal **fitness**,
+Forge is a private, **on-device** iOS + Apple Watch app for personal **fitness**,
 **skincare**, and **nutrition** routines — with personalized CrossFit
 programming, reminders, and progress tracking. No account, no server, no
 analytics. Your data never leaves your device.
@@ -23,34 +23,37 @@ analytics. Your data never leaves your device.
   protein tracker and fat-loss tips.
 - **Progress** — streaks, a dot-calendar consistency view, and a bento stat grid.
 - **Apple Watch** — view today's routines, check them off, see your streak.
-- **Privacy-first HealthKit** — read-only, on-device, minimal scopes.
+- **Privacy-first** — optional Apple Health reads are on-device, read-only,
+  minimal scope; optional genetic-trait fields never leave the device.
 
 ## Tech
 
 - SwiftUI · SwiftData (local persistence) · HealthKit · WatchConnectivity ·
   UserNotifications
-- iOS 17+ / watchOS 10+ · Xcode 26
+- iOS 17+ / watchOS 10+ · Xcode 26 · project generated via XcodeGen
 
 ## Project layout
 
 ```
-Glow/
-  Models/            SwiftData models (routines, steps, completions, meals, profile)
-  Resources/         Theme & design system
-  Services/          Seed data, notifications, Health, connectivity, CrossFit generator
-  Views/             Today, Fitness, Skincare, Nutrition, Progress
-Branding/            Brand guide & logo
+Glow/            iOS app sources (folder name retained from original project name)
+  Models/        SwiftData models (routines, steps, completions, meals, profile)
+  Resources/     Theme & design system
+  Services/      Seed data, notifications, Health, connectivity, CrossFit generator
+  Views/         Today, Fitness, Skincare, Nutrition, Progress
+GlowWatch/       watchOS app sources
+Branding/        Brand guide & logo
+project.yml      XcodeGen spec — edit this, then `xcodegen generate`
 ```
 
-## Status
-
-Complete and **building for the Simulator** (iOS app + embedded watchOS app).
-The project is generated from `project.yml` via [XcodeGen](https://github.com/yonaskolb/XcodeGen).
-See **[SETUP.md](SETUP.md)** to open, run, and ship to TestFlight.
+## Run it
 
 ```bash
-brew install xcodegen && cd Glow && xcodegen generate && open Glow.xcodeproj
+brew install xcodegen        # if needed
+xcodegen generate            # creates Forge.xcodeproj
+open Forge.xcodeproj         # pick the Forge scheme + an iPhone simulator, ⌘R
 ```
+
+See **[SETUP.md](SETUP.md)** for on-device install and TestFlight.
 
 > Not medical advice. Consult a professional before starting any exercise or
 > nutrition program, especially with existing injuries.

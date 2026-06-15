@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D8B26740CAB956DDDCF0D308"
+               BlueprintIdentifier = "341D7849DB5254D98B430595"
                BuildableName = "Glow.app"
                BlueprintName = "Glow"
-               ReferencedContainer = "container:Glow.xcodeproj">
+               ReferencedContainer = "container:Forge.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,10 +29,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "54A99A2256E4F89346A368E9"
+               BlueprintIdentifier = "0B7757D4F6104C4C67F01227"
                BuildableName = "GlowWatch.app"
                BlueprintName = "GlowWatch"
-               ReferencedContainer = "container:Glow.xcodeproj">
+               ReferencedContainer = "container:Forge.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,10 +46,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D8B26740CAB956DDDCF0D308"
+            BlueprintIdentifier = "341D7849DB5254D98B430595"
             BuildableName = "Glow.app"
             BlueprintName = "Glow"
-            ReferencedContainer = "container:Glow.xcodeproj">
+            ReferencedContainer = "container:Forge.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -69,10 +69,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D8B26740CAB956DDDCF0D308"
+            BlueprintIdentifier = "341D7849DB5254D98B430595"
             BuildableName = "Glow.app"
             BlueprintName = "Glow"
-            ReferencedContainer = "container:Glow.xcodeproj">
+            ReferencedContainer = "container:Forge.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -88,10 +88,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D8B26740CAB956DDDCF0D308"
+            BlueprintIdentifier = "341D7849DB5254D98B430595"
             BuildableName = "Glow.app"
             BlueprintName = "Glow"
-            ReferencedContainer = "container:Glow.xcodeproj">
+            ReferencedContainer = "container:Forge.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

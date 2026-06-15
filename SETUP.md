@@ -1,6 +1,6 @@
-# Glow — Setup, Run & TestFlight Guide
+# Forge — Setup, Run & TestFlight Guide
 
-The project is generated from `project.yml` with **XcodeGen**, so `Glow.xcodeproj`
+The project is generated from `project.yml` with **XcodeGen**, so `Forge.xcodeproj`
 is reproducible. If you ever edit targets/settings, edit `project.yml` and run
 `xcodegen generate` rather than changing the project by hand.
 
@@ -11,12 +11,12 @@ is reproducible. If you ever edit targets/settings, edit `project.yml` and run
 ```bash
 brew install xcodegen        # only if not already installed
 cd Glow
-xcodegen generate            # creates/refreshes Glow.xcodeproj
-open Glow.xcodeproj
+xcodegen generate            # creates/refreshes Forge.xcodeproj
+open Forge.xcodeproj
 ```
 
 In Xcode:
-1. Select the **Glow** scheme and an **iPhone Simulator** (e.g. iPhone 16).
+1. Select the **Forge** scheme and an **iPhone Simulator** (e.g. iPhone 16).
 2. Press **⌘R**. The app launches with seeded routines and the Bihari meal plan.
 3. To preview the **watch app**: in the scheme menu pick a paired Watch simulator,
    or run the iOS app and open the Watch simulator — today's routines sync over.
@@ -32,11 +32,11 @@ You can sideload with a **free** Apple ID — no paid program required, but buil
 expire after 7 days and you can't use TestFlight.
 
 1. Xcode ▸ **Settings ▸ Accounts** ▸ add your Apple ID.
-2. Select the **Glow** target ▸ **Signing & Capabilities** ▸ check
+2. Select the **Forge** target ▸ **Signing & Capabilities** ▸ check
    *Automatically manage signing* ▸ pick your **Personal Team**.
 3. Do the same for the **GlowWatch** target.
 4. You may need to make the bundle IDs unique to you — change
-   `com.sinhaankur.glow` in `project.yml` (and `.watchkitapp`) to something like
+   `com.sinhaankur.forge` in `project.yml` (and `.watchkitapp`) to something like
    `com.<yourname>.glow`, then `xcodegen generate`.
 5. Plug in your iPhone, select it as the run destination, **⌘R**.
 6. On the phone: **Settings ▸ General ▸ VPN & Device Management** ▸ trust your
@@ -53,8 +53,8 @@ This is the path to **install & test before launch**.
 2. In `project.yml`, set `DEVELOPMENT_TEAM` to your **Team ID** (found in the
    developer portal ▸ Membership). Run `xcodegen generate`.
 3. In **App Store Connect** (<https://appstoreconnect.apple.com>):
-   - **Apps ▸ +** ▸ New App. Platform iOS, name "Glow", bundle ID
-     `com.sinhaankur.glow` (register the ID in the portal first if prompted),
+   - **Apps ▸ +** ▸ New App. Platform iOS, name "Forge", bundle ID
+     `com.sinhaankur.forge` (register the ID in the portal first if prompted),
      SKU `glow-001`.
 
 ### Each build
@@ -66,10 +66,10 @@ This is the path to **install & test before launch**.
 4. In App Store Connect ▸ **TestFlight**:
    - Add yourself under **Internal Testing** (instant, no review), or set up
      **External Testing** (needs a quick Beta App Review).
-   - Provide the export-compliance answer (Glow uses no non-exempt encryption →
+   - Provide the export-compliance answer (Forge uses no non-exempt encryption →
      "No").
 5. Install **TestFlight** from the App Store on your iPhone, sign in with the
-   same Apple ID, and install Glow. The watch app installs from the iPhone
+   same Apple ID, and install Forge. The watch app installs from the iPhone
    Watch app once the phone build is on.
 
 ### Bumping the build number
@@ -83,8 +83,8 @@ number.
 
 | Target | Bundle ID |
 |--------|-----------|
-| iOS app | `com.sinhaankur.glow` |
-| Watch app | `com.sinhaankur.glow.watchkitapp` |
+| iOS app | `com.sinhaankur.forge` |
+| Watch app | `com.sinhaankur.forge.watchkitapp` |
 
 Change the prefix in `project.yml` (`bundleIdPrefix` + the per-target
 `PRODUCT_BUNDLE_IDENTIFIER`) if you want them under your own domain.

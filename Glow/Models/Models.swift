@@ -293,6 +293,46 @@ enum InjuryArea: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+/// Optional genetic-trait categories the user can set from their own DNA report.
+/// These are coarse trait buckets — NOT raw genotypes — and are stored only on
+/// device. They let the plan adapt (e.g. more aerobic work, dairy-friendly
+/// protein) without the app ever holding identifying genetic data.
+enum AerobicResponse: String, Codable, CaseIterable, Identifiable {
+    case unknown, normal, high
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .unknown: return "Not set"
+        case .normal: return "Normal aerobic response"
+        case .high: return "High aerobic response"
+        }
+    }
+}
+
+enum CaffeineMetabolism: String, Codable, CaseIterable, Identifiable {
+    case unknown, slow, fast
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .unknown: return "Not set"
+        case .slow: return "Slow caffeine metabolizer"
+        case .fast: return "Fast caffeine metabolizer"
+        }
+    }
+}
+
+enum CarbResponse: String, Codable, CaseIterable, Identifiable {
+    case unknown, sensitive, resilient
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .unknown: return "Not set"
+        case .sensitive: return "Carb-sensitive"
+        case .resilient: return "Carb-resilient"
+        }
+    }
+}
+
 /// Single-row profile capturing the metrics needed to personalize CrossFit plans.
 @Model
 final class UserProfile {
@@ -304,6 +344,12 @@ final class UserProfile {
     var limitationsNote: String
     var daysPerWeek: Int
 
+    // --- Optional genetic traits (on-device only) ---
+    var aerobicRaw: String
+    var caffeineRaw: String
+    var carbRaw: String
+    var lactoseTolerant: Bool
+
     init(
         heightCm: Double = 175,
         weightKg: Double = 75,
@@ -311,7 +357,11 @@ final class UserProfile {
         experience: ExperienceLevel = .intermediate,
         injuries: [InjuryArea] = [],
         limitationsNote: String = "",
-        daysPerWeek: Int = 4
+        daysPerWeek: Int = 4,
+        aerobic: AerobicResponse = .unknown,
+        caffeine: CaffeineMetabolism = .unknown,
+        carb: CarbResponse = .unknown,
+        lactoseTolerant: Bool = false
     ) {
         self.heightCm = heightCm
         self.weightKg = weightKg
@@ -320,6 +370,23 @@ final class UserProfile {
         self.injuryRaws = injuries.map(\.rawValue)
         self.limitationsNote = limitationsNote
         self.daysPerWeek = daysPerWeek
+        self.aerobicRaw = aerobic.rawValue
+        self.caffeineRaw = caffeine.rawValue
+        self.carbRaw = carb.rawValue
+        self.lactoseTolerant = lactoseTolerant
+    }
+
+    var aerobic: AerobicResponse {
+        get { AerobicResponse(rawValue: aerobicRaw) ?? .unknown }
+        set { aerobicRaw = newValue.rawValue }
+    }
+    var caffeine: CaffeineMetabolism {
+        get { CaffeineMetabolism(rawValue: caffeineRaw) ?? .unknown }
+        set { caffeineRaw = newValue.rawValue }
+    }
+    var carb: CarbResponse {
+        get { CarbResponse(rawValue: carbRaw) ?? .unknown }
+        set { carbRaw = newValue.rawValue }
     }
 
     var bodyShape: BodyShape {
