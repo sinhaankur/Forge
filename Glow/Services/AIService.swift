@@ -42,6 +42,44 @@ final class AIService: ObservableObject {
         return PlanParser.makeRoutine(from: notes, kind: kind, timeOfDay: timeOfDay)
     }
 
+    /// Build a private, on-device context string from the user's profile —
+    /// used to ground the AI's answers. Never leaves the device.
+    static func personalContext(profile: UserProfile?, readiness: SleepStore.Readiness?) -> String {
+        guard let p = profile else { return "No profile yet." }
+        var bits: [String] = []
+        if !p.displayName.isEmpty { bits.append("Name: \(p.displayName)") }
+        bits.append("Body: \(Int(p.heightCm))cm, \(Int(p.weightKg))kg, BMI \(String(format: "%.0f", p.bmi)), \(p.bodyShape.title)")
+        bits.append("Experience: \(p.experience.title), \(p.daysPerWeek) days/week")
+        if !p.injuries.isEmpty { bits.append("Injuries to protect: \(p.injuries.map(\.title).joined(separator: ", "))") }
+        // Genetics (derived trait categories only — not raw genotypes).
+        var genetics: [String] = []
+        if p.aerobic != .unknown { genetics.append(p.aerobic.title) }
+        if p.caffeine != .unknown { genetics.append(p.caffeine.title) }
+        if p.carb != .unknown { genetics.append(p.carb.title) }
+        if p.lactoseTolerant { genetics.append("lactose tolerant") }
+        if !genetics.isEmpty { bits.append("Genetics: \(genetics.joined(separator: ", "))") }
+        if let r = readiness { bits.append("Today's readiness: \(r.score)/100 (\(r.label)), ~\(String(format: "%.1f", r.sleepHours))h sleep") }
+        return bits.joined(separator: "\n")
+    }
+
+    /// A plain-English "your biology" summary synthesizing the user's DNA panel.
+    func dnaSummary(insights: [DNAReport.Insight], context: String) async -> String? {
+        guard !insights.isEmpty else { return nil }
+        let markers = insights.map { "\($0.gene): \($0.result) — \($0.action)" }.joined(separator: "\n")
+        return await answer(
+            "Write a warm 3–4 sentence summary of my genetic profile and my top 2 priorities. Be specific and encouraging.",
+            context: context + "\n\nGenetic markers:\n" + markers
+        )
+    }
+
+    /// A short daily coaching note from DNA + readiness + the day.
+    func dailyCoaching(context: String) async -> String? {
+        await answer(
+            "In 2 sentences, what should I focus on today for training, fuel, and recovery? Be specific to my data.",
+            context: context
+        )
+    }
+
     /// Plain-English explanation/coaching about the user's plan or data.
     /// Returns nil if on-device AI isn't available (caller can hide the feature).
     func answer(_ question: String, context: String) async -> String? {

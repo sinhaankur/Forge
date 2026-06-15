@@ -12,6 +12,7 @@ struct TodayView: View {
     @State private var showNew = false
     @State private var showProfile = false
     @State private var showDNA = false
+    @State private var showCoach = false
 
     private var profile: UserProfile? { profiles.first }
 
@@ -70,6 +71,7 @@ struct TodayView: View {
             .sheet(isPresented: $showNew) { RoutineEditorView(routine: nil, kind: .fitness) }
             .sheet(isPresented: $showProfile) { ProfileView() }
             .sheet(isPresented: $showDNA) { DNAInsightsView() }
+            .sheet(isPresented: $showCoach) { AICoachView() }
         }
     }
 
@@ -81,7 +83,7 @@ struct TodayView: View {
                 .font(.system(size: 34, weight: .heavy))
                 .foregroundStyle(GlowTheme.ink)
             Spacer()
-            iconButton("slider.horizontal.3") {}
+            iconButton("sparkles") { showCoach = true }
             iconButton("plus") { showNew = true }
         }
     }
