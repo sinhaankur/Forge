@@ -86,10 +86,14 @@ enum DNAImporter {
         return t
     }
 
-    /// Build rsid -> genotype map from a 23andMe/AncestryDNA text export.
-    /// Handles `#` comment lines, tab- or comma-separated columns, and both
-    /// the 23andMe layout (rsid, chrom, pos, genotype) and the AncestryDNA
-    /// layout (rsid, chrom, pos, allele1, allele2).
+    /// Build rsid -> genotype map from any major consumer-DNA text export.
+    /// Format-agnostic — handles:
+    ///   • 23andMe:      rsid \t chrom \t pos \t genotype   (tab, no quotes)
+    ///   • AncestryDNA:  rsid \t chrom \t pos \t allele1 \t allele2
+    ///   • MyHeritage:   "rsid","chrom","pos","genotype"    (comma, quoted)
+    ///   • FamilyTreeDNA/LivingDNA: comma variants of the above
+    /// Skips `#`/`##` headers, blank lines, and no-calls. rsID-keyed so column
+    /// order quirks between vendors don't matter.
     private static func genotypeMap(from text: String) -> [String: String] {
         var map: [String: String] = [:]
         // Only the SNPs we care about — keeps it fast and avoids holding the
@@ -100,8 +104,10 @@ enum DNAImporter {
         ]
 
         text.enumerateLines { line, _ in
-            guard let first = line.first, first == "r" else { return } // rsIDs start with "rs"
-            let cols = line.split(whereSeparator: { $0 == "\t" || $0 == "," })
+            // MyHeritage wraps every field in quotes; strip them. 23andMe/Ancestry don't.
+            let clean = line.replacingOccurrences(of: "\"", with: "")
+            guard let first = clean.first, first == "r" else { return } // rsIDs start with "rs"
+            let cols = clean.split(whereSeparator: { $0 == "\t" || $0 == "," })
                 .map { $0.trimmingCharacters(in: .whitespaces) }
             guard let rsid = cols.first, wanted.contains(rsid) else { return }
 

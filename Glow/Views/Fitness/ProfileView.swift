@@ -23,6 +23,7 @@ struct ProfileView: View {
     @State private var b12: B12Methylation = .unknown
     @State private var generated = false
     @State private var showImporter = false
+    @State private var showDNAInsights = false
 
     private var bmi: Double {
         let m = heightCm / 100
@@ -94,6 +95,11 @@ struct ProfileView: View {
                     Picker("B12 methylation", selection: $b12) {
                         ForEach(B12Methylation.allCases) { Text($0.title).tag($0) }
                     }
+                    Button {
+                        save(); showDNAInsights = true
+                    } label: {
+                        Label("Visualize my DNA", systemImage: "dna")
+                    }
                 }
 
                 Section {
@@ -123,6 +129,7 @@ struct ProfileView: View {
             .alert("DNA imported", isPresented: $importAlert) {
                 Button("OK") {}
             } message: { Text(importMessage) }
+            .sheet(isPresented: $showDNAInsights) { DNAInsightsView() }
         }
     }
 
