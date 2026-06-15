@@ -13,6 +13,8 @@ struct SmartAddView: View {
     var onCreated: (Routine) -> Void
 
     @State private var notes = ""
+    @State private var creating = false
+    @StateObject private var ai = AIService.shared
 
     private var timeOfDay: TimeOfDay {
         switch Calendar.current.component(.hour, from: .now) {
@@ -46,9 +48,14 @@ struct SmartAddView: View {
                     // 2) Paste AI notes.
                     GlowPanel {
                         VStack(alignment: .leading, spacing: 10) {
-                            Label("PASTE A PLAN", systemImage: "doc.on.clipboard")
-                                .font(GlowTheme.caption()).foregroundStyle(GlowTheme.accent)
-                            Text("Paste a workout from Gemini, ChatGPT, or your notes. Forge turns it into an editable routine.")
+                            HStack {
+                                Label("PASTE A PLAN", systemImage: "doc.on.clipboard")
+                                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.accent)
+                                Spacer()
+                                Label(ai.statusText, systemImage: ai.isAvailable ? "cpu" : "text.alignleft")
+                                    .font(.system(size: 10, weight: .semibold)).foregroundStyle(GlowTheme.inkMuted)
+                            }
+                            Text("Paste a workout from Gemini, ChatGPT, or your notes. Forge turns it into an editable routine — on your device.")
                                 .font(GlowTheme.body(13)).foregroundStyle(GlowTheme.inkMuted)
                             TextEditor(text: $notes)
                                 .frame(minHeight: 140)
@@ -57,12 +64,18 @@ struct SmartAddView: View {
                                 .background(GlowTheme.surfaceHigh)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                                 .foregroundStyle(GlowTheme.ink)
-                            GlowButton(title: "Create from notes", systemImage: "wand.and.stars") {
-                                let r = PlanParser.makeRoutine(from: notes, kind: .fitness, timeOfDay: timeOfDay)
-                                context.insert(r); try? context.save()
-                                dismiss(); onCreated(r)
+                            GlowButton(title: creating ? "Creating…" : "Create from notes",
+                                       systemImage: "wand.and.stars") {
+                                guard !creating else { return }
+                                creating = true
+                                Task {
+                                    let r = await ai.routine(fromNotes: notes, kind: .fitness, timeOfDay: timeOfDay)
+                                    context.insert(r); try? context.save()
+                                    creating = false
+                                    dismiss(); onCreated(r)
+                                }
                             }
-                            .disabled(notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                            .disabled(notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || creating)
                             .opacity(notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 0.5 : 1)
                         }
                     }

@@ -41,6 +41,7 @@
 		AA0C702B7D42D652DBC857A3 /* RoutineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */; };
 		BA39F19BAD0871C12740391E /* DNAInsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873682C642D8FE4D265FFD1E /* DNAInsightsView.swift */; };
 		D00A7883601D70924829FEF0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2275A20906FE573CA34EA09 /* ProfileView.swift */; };
+		EDD8277B732225A33FF6C365 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E430B09C00FC9526B34A6A06 /* AIService.swift */; };
 		F2178C105BBB63166F814303 /* WorkoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072DEA4E412DFD928FC8390 /* WorkoutGenerator.swift */; };
 		F3BE1131ACE963C49B94965B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBC30FB99C682257359F82EE /* Assets.xcassets */; };
 		F4A877EA43B30BE95409177B /* RoutineEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE6FF7BCAE968D69A574848 /* RoutineEditorView.swift */; };
@@ -115,6 +116,7 @@
 		D82A40972609BE5B64925B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9A0B6D6D392864D6D1BD48B /* Glow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Glow.entitlements; sourceTree = "<group>"; };
 		DB2000CF36A7D27D9FD267B9 /* MotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionService.swift; sourceTree = "<group>"; };
+		E430B09C00FC9526B34A6A06 /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
 		EC36222163248A94522BA5E4 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		F9AA5B24857916B94C6B3AD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 		00A769BBB2452051D9B4335D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E430B09C00FC9526B34A6A06 /* AIService.swift */,
 				B9BD28E2AA7A6170E314E67A /* CalendarService.swift */,
 				6E3237A42A929FCE680185A5 /* ConnectivityService.swift */,
 				BAFB0F2277988707A0641826 /* DNAImporter.swift */,
@@ -353,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD8277B732225A33FF6C365 /* AIService.swift in Sources */,
 				06BE149E6FAC7157D1773C5D /* CalendarService.swift in Sources */,
 				490237B29D41D72FC6BFDF8B /* ConnectivityService.swift in Sources */,
 				22C5C6A205C208EB07196138 /* DNAImporter.swift in Sources */,
