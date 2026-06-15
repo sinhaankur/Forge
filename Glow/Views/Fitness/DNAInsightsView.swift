@@ -90,6 +90,9 @@ struct DNAInsightsView: View {
         let meaning: String
         let usedFor: String
         let lifestyle: String   // how lifestyle can change/express this trait
+        let gene: String        // e.g. "PPARGC1A"
+        let snp: String         // e.g. "rs8192678"
+        let determination: String // how the genotype maps to the result
         let isStrength: Bool    // highlight (accent) vs neutral
     }
 
@@ -134,12 +137,16 @@ struct DNAInsightsView: View {
                 meaning: "Your muscles adapt well to oxygen-demanding training.",
                 usedFor: "Your plan leans into zone-2 cardio + engine work.",
                 lifestyle: "This is a ceiling, not a guarantee — consistent zone-2 + interval training is what actually builds the mitochondria. Detraining reverses it within weeks.",
+                gene: "PPARGC1A", snp: "rs8192678",
+                determination: "PPARGC1A makes PGC-1α, the master switch for building mitochondria. The C allele (Gly482) is linked to a higher aerobic-training response. You carry C → HIGH.",
                 isStrength: true))
         case .normal:
             cards.append(Card(emoji: "🫀", title: "Aerobic Response", result: "Normal",
                 meaning: "Standard cardiovascular adaptation.",
                 usedFor: "Balanced strength + conditioning mix.",
                 lifestyle: "Genetics set a smaller head start here — but trainable. Progressive cardio still drives big VO₂max gains regardless of genotype.",
+                gene: "PPARGC1A", snp: "rs8192678",
+                determination: "The A/Ser482 variant is associated with a more typical aerobic-training response. Your genotype lacks the favorable C → Normal.",
                 isStrength: false))
         case .unknown: break
         }
@@ -150,12 +157,16 @@ struct DNAInsightsView: View {
                 meaning: "Your liver clears caffeine efficiently.",
                 usedFor: "Coffee 30–45 min pre-workout for a clean boost.",
                 lifestyle: "Tolerance still builds with daily use — cycle caffeine to keep the pre-workout effect sharp. Heavy late-day intake can still cost sleep.",
+                gene: "CYP1A2", snp: "rs762551",
+                determination: "CYP1A2 is the liver enzyme that breaks down caffeine. The AA genotype = the fast-metabolizer form. You're AA → FAST.",
                 isStrength: true))
         case .slow:
             cards.append(Card(emoji: "☕️", title: "Caffeine", result: "Slow metabolizer",
                 meaning: "Caffeine lingers longer in your system.",
                 usedFor: "Keep caffeine earlier in the day to protect sleep.",
                 lifestyle: "Capping intake (~200mg) and a midday cutoff largely offsets this — behavior matters more than the gene here.",
+                gene: "CYP1A2", snp: "rs762551",
+                determination: "Carrying a C allele slows the CYP1A2 enzyme, so caffeine clears more slowly. You carry C → Slow.",
                 isStrength: false))
         case .unknown: break
         }
@@ -166,12 +177,16 @@ struct DNAInsightsView: View {
                 meaning: "You process complex carbs well; stable satiety.",
                 usedFor: "Clean carbs around your workout windows.",
                 lifestyle: "Resilience isn't a free pass — total calories and food quality still drive body composition. Pair carbs with protein/fiber.",
+                gene: "FTO", snp: "rs9939609",
+                determination: "FTO influences appetite/satiety signaling. The A allele is the higher-appetite risk variant; the TT genotype is protective. You're TT → Resilient.",
                 isStrength: true))
         case .sensitive:
             cards.append(Card(emoji: "🍞", title: "Carb Response", result: "Carb-sensitive",
                 meaning: "Appetite/weight may respond more to carbs.",
                 usedFor: "Favor protein + fiber; mind portions.",
                 lifestyle: "Highly modifiable: sleep, steps, and protein-forward meals blunt this effect substantially. The gene nudges, it doesn't decide.",
+                gene: "FTO", snp: "rs9939609",
+                determination: "You carry the FTO A allele, linked to stronger appetite drive and weight response to diet → Carb-sensitive.",
                 isStrength: false))
         case .unknown: break
         }
@@ -184,6 +199,10 @@ struct DNAInsightsView: View {
                                        : "Lean on non-dairy protein sources.",
             lifestyle: p.lactoseTolerant ? "Tolerance can still drift with gut health — fermented dairy (yogurt, kefir) is easiest to digest."
                                          : "Lactase enzymes, lactose-free dairy, or hard cheeses/yogurt often let you include dairy comfortably.",
+            gene: "MCM6 / LCT", snp: "rs4988235",
+            determination: p.lactoseTolerant
+                ? "The T allele keeps the lactase (LCT) gene switched on into adulthood (lactase persistence). You carry T → Tolerant."
+                : "The GG genotype is the ancestral form where lactase switches off after weaning → may be sensitive.",
             isStrength: p.lactoseTolerant))
 
         if p.vitaminD != .unknown {
@@ -195,6 +214,10 @@ struct DNAInsightsView: View {
                                               : "Maintain with sun + diet.",
                 lifestyle: p.vitaminD == .lower ? "Very modifiable: sensible sun exposure and/or D3 supplementation reliably normalize levels. Test, don't guess."
                                                 : "Keep regular sun + dietary D; levels can still drop in winter or with indoor lifestyles.",
+                gene: "GC (VDBP)", snp: "rs2282679",
+                determination: p.vitaminD == .lower
+                    ? "GC encodes the vitamin-D binding protein. The G allele is linked to lower circulating 25(OH)D. You carry G → tends low."
+                    : "Your GC genotype isn't associated with reduced vitamin-D transport → Normal.",
                 isStrength: p.vitaminD != .lower))
         }
 
@@ -207,6 +230,10 @@ struct DNAInsightsView: View {
                                            : "No special action needed.",
                 lifestyle: p.b12 == .reduced ? "Diet fully compensates: leafy greens (folate) + eggs/dairy/meat (B12), or methylfolate/methyl-B12 forms. Alcohol depletes both."
                                              : "Maintain B12/folate intake; vegans of any genotype should still supplement B12.",
+                gene: "MTHFR", snp: "rs1801133",
+                determination: p.b12 == .reduced
+                    ? "MTHFR processes folate for methylation. The T (677T) allele lowers enzyme activity. You carry T → Reduced."
+                    : "The CC genotype keeps MTHFR at full activity → Efficient methylation.",
                 isStrength: p.b12 != .reduced))
         }
 
@@ -296,6 +323,8 @@ struct GenomeMapView: View {
                     .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
                 Text("Marker positions are approximate (illustrative, not to scale).")
                     .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                Text("Origin note: these variants arose across human populations — e.g. lactase persistence (MCM6) spread with dairy-herding cultures, and FTO/CYP1A2 frequencies vary by ancestry. Your traits reflect that shared heritage, not a single origin.")
+                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
                 ForEach(chromosomes, id: \.self) { chr in
                     let onChr = markers.filter { $0.chromosome == chr }
                     VStack(alignment: .leading, spacing: 4) {
@@ -325,6 +354,7 @@ struct GenomeMapView: View {
 
 private struct DNACard: View {
     let card: DNAInsightsView.Card
+    @State private var showScience = false
 
     var body: some View {
         GlowPanel {
@@ -340,12 +370,20 @@ private struct DNACard: View {
                 }
                 Text(card.meaning)
                     .font(GlowTheme.body(15)).foregroundStyle(GlowTheme.ink)
+
+                // Gene · SNP chips — the "what determines this".
+                HStack(spacing: 6) {
+                    chip(card.gene, icon: "dna")
+                    chip(card.snp, icon: "number")
+                }
+
                 HStack(alignment: .top, spacing: 6) {
                     Image(systemName: "arrow.turn.down.right")
                         .font(.system(size: 11)).foregroundStyle(GlowTheme.accent)
                     Text(card.usedFor)
                         .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
                 }
+
                 Divider().overlay(GlowTheme.faint)
                 HStack(alignment: .top, spacing: 6) {
                     Image(systemName: "figure.walk.motion")
@@ -357,7 +395,39 @@ private struct DNACard: View {
                             .font(GlowTheme.body(13)).foregroundStyle(GlowTheme.ink)
                     }
                 }
+
+                // Expandable "how this is determined".
+                Button { withAnimation(.easeInOut(duration: 0.2)) { showScience.toggle() } } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: showScience ? "chevron.down" : "chevron.right")
+                            .font(.system(size: 10, weight: .bold))
+                        Text(showScience ? "Hide the science" : "How is this determined?")
+                            .font(GlowTheme.caption())
+                    }
+                    .foregroundStyle(GlowTheme.accent)
+                }
+                .buttonStyle(.plain)
+                if showScience {
+                    Text(card.determination)
+                        .font(GlowTheme.body(13))
+                        .foregroundStyle(GlowTheme.inkMuted)
+                        .padding(10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(GlowTheme.surfaceHigh)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                }
             }
         }
+    }
+
+    private func chip(_ text: String, icon: String) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: icon).font(.system(size: 9, weight: .bold))
+            Text(text).font(.system(size: 11, weight: .semibold, design: .monospaced))
+        }
+        .foregroundStyle(GlowTheme.accent)
+        .padding(.horizontal, 8).padding(.vertical, 4)
+        .background(GlowTheme.accent.opacity(0.12))
+        .clipShape(Capsule())
     }
 }
