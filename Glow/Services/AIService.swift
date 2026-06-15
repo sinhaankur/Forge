@@ -80,6 +80,42 @@ final class AIService: ObservableObject {
         )
     }
 
+    /// Generate a full workout tailored to the user's genetics + readiness +
+    /// injuries, on-device. Falls back to the rule-based generator's themes by
+    /// asking the LLM to produce a structured plan; returns nil if unavailable.
+    func smartPlan(context: String, timeOfDay: TimeOfDay) async -> Routine? {
+        #if canImport(FoundationModels)
+        if #available(iOS 26, *), isAvailable {
+            let session = LanguageModelSession(instructions: """
+            You are a CrossFit coach. Design ONE safe session tailored to the \
+            athlete's genetics, readiness, experience, and injuries. ALWAYS start \
+            with a brief warm-up. Avoid movements that stress listed injuries. \
+            Give each exercise a name and sets/reps or a duration in seconds.
+            """)
+            let prompt = "Athlete profile:\n\(context)\n\nTime of day: \(timeOfDay.title)"
+            if let resp = try? await session.respond(to: prompt, generating: GeneratedPlan.self) {
+                let plan = resp.content
+                let routine = Routine(
+                    name: plan.name.isEmpty ? "AI Session" : plan.name,
+                    kind: .fitness, timeOfDay: timeOfDay,
+                    notes: "Built on-device from your genetics + readiness — edit freely.",
+                    colorHex: "#19E3C2",
+                    activeWeekdays: [Calendar.current.component(.weekday, from: .now)]
+                )
+                for (i, e) in plan.exercises.prefix(30).enumerated() {
+                    let step = RoutineStep(title: e.name, detail: e.detail ?? "", order: i,
+                                           sets: e.sets ?? 0, reps: e.reps ?? 0,
+                                           durationSeconds: e.durationSeconds ?? 0)
+                    step.routine = routine
+                    routine.steps.append(step)
+                }
+                if !routine.steps.isEmpty { return routine }
+            }
+        }
+        #endif
+        return nil
+    }
+
     /// Plain-English explanation/coaching about the user's plan or data.
     /// Returns nil if on-device AI isn't available (caller can hide the feature).
     func answer(_ question: String, context: String) async -> String? {

@@ -14,6 +14,7 @@ struct SmartAddView: View {
 
     @State private var notes = ""
     @State private var creating = false
+    @State private var aiBuilding = false
     @StateObject private var ai = AIService.shared
 
     private var timeOfDay: TimeOfDay {
@@ -45,7 +46,33 @@ struct SmartAddView: View {
                         }
                     }
 
-                    // 2) Paste AI notes.
+                    // 2) AI session from genetics (on-device), shown when available.
+                    if ai.isAvailable {
+                        GlowPanel {
+                            VStack(alignment: .leading, spacing: 10) {
+                                Label("AI SESSION FROM YOUR DNA", systemImage: "sparkles")
+                                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.accent)
+                                Text("Forge designs a session from your genetics, readiness & injuries — on your device.")
+                                    .font(GlowTheme.body(13)).foregroundStyle(GlowTheme.inkMuted)
+                                GlowButton(title: aiBuilding ? "Designing…" : "Generate AI session",
+                                           systemImage: "wand.and.stars") {
+                                    guard !aiBuilding else { return }
+                                    aiBuilding = true
+                                    Task {
+                                        let ctx = AIService.personalContext(
+                                            profile: profiles.first,
+                                            readiness: SleepStore.readiness(in: context))
+                                        let r = await ai.smartPlan(context: ctx, timeOfDay: timeOfDay)
+                                        aiBuilding = false
+                                        if let r { context.insert(r); try? context.save(); dismiss(); onCreated(r) }
+                                    }
+                                }
+                                .disabled(aiBuilding)
+                            }
+                        }
+                    }
+
+                    // 3) Paste AI notes.
                     GlowPanel {
                         VStack(alignment: .leading, spacing: 10) {
                             HStack {

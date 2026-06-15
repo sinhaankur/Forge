@@ -10,11 +10,18 @@ struct AICoachView: View {
     @Query private var profiles: [UserProfile]
     @StateObject private var ai = AIService.shared
 
+    // Daily note cached so it refreshes once per morning, not every open.
+    @AppStorage("coachDailyNote") private var cachedDaily = ""
+    @AppStorage("coachDailyDay") private var cachedDay = ""
     @State private var daily: String?
     @State private var summary: String?
     @State private var question = ""
     @State private var answer: String?
     @State private var thinking = false
+
+    private var todayKey: String {
+        let f = DateFormatter(); f.dateFormat = "yyyy-MM-dd"; return f.string(from: .now)
+    }
 
     private var ctx: String {
         AIService.personalContext(profile: profiles.first,
@@ -75,7 +82,12 @@ struct AICoachView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
             .task {
-                daily = await ai.dailyCoaching(context: ctx)
+                // Reuse today's cached note; regenerate only when the day changed.
+                if cachedDay == todayKey && !cachedDaily.isEmpty {
+                    daily = cachedDaily
+                } else if let note = await ai.dailyCoaching(context: ctx) {
+                    daily = note; cachedDaily = note; cachedDay = todayKey
+                }
                 summary = await ai.dnaSummary(insights: insights, context: ctx)
             }
         }
