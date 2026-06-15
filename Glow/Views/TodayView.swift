@@ -113,6 +113,16 @@ struct TodayView: View {
     }
     private var hasDNA: Bool { !dnaTraits.isEmpty }
 
+    /// One detailed insight chosen by the day-of-year, so a different genetic
+    /// tip surfaces each day right on Today.
+    private var dnaTipOfDay: DNAReport.Insight? {
+        guard let csv = profile?.dnaPanel, !csv.isEmpty else { return nil }
+        let insights = DNAReport.insights(fromPanelCSV: csv)
+        guard !insights.isEmpty else { return nil }
+        let day = Calendar.current.ordinality(of: .day, in: .era, for: .now) ?? 0
+        return insights[day % insights.count]
+    }
+
     private var dnaStrip: some View {
         Button { hasDNA ? (showDNA = true) : (showProfile = true) } label: {
             VStack(alignment: .leading, spacing: 10) {
@@ -126,6 +136,19 @@ struct TodayView: View {
                 if hasDNA {
                     // Wrapping chips of key traits.
                     FlexChips(items: dnaTraits)
+                    // Rotating detailed "tip of the day" from the full panel.
+                    if let tip = dnaTipOfDay {
+                        HStack(alignment: .top, spacing: 8) {
+                            Image(systemName: "sparkles").font(.system(size: 11)).foregroundStyle(GlowTheme.accent).padding(.top, 2)
+                            VStack(alignment: .leading, spacing: 1) {
+                                Text("\(tip.gene) · \(tip.result)")
+                                    .font(.system(size: 12, weight: .bold)).foregroundStyle(GlowTheme.ink)
+                                Text(tip.action)
+                                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                            }
+                        }
+                        .padding(.top, 2)
+                    }
                 } else {
                     Text("Import your DNA file to personalize training, fuel & recovery — it stays on your device.")
                         .font(GlowTheme.body(13)).foregroundStyle(GlowTheme.inkMuted)
