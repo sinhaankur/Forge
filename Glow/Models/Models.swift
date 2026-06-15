@@ -376,6 +376,11 @@ final class UserProfile {
     var vitaminDRaw: String = VitaminDTendency.unknown.rawValue
     var b12Raw: String = B12Methylation.unknown.rawValue
 
+    // --- Personal identity (on-device only) ---
+    var displayName: String = ""
+    /// Optional avatar image, stored locally (JPEG data). External so it's lazy.
+    @Attribute(.externalStorage) var avatarData: Data? = nil
+
     init(
         heightCm: Double = 175,
         weightKg: Double = 75,

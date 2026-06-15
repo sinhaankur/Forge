@@ -7,8 +7,12 @@ import SwiftData
 struct TodayView: View {
     @Environment(\.modelContext) private var context
     @Query private var allRoutines: [Routine]
+    @Query private var profiles: [UserProfile]
     @State private var logTarget: Routine?
     @State private var showNew = false
+    @State private var showProfile = false
+
+    private var profile: UserProfile? { profiles.first }
 
     private var todays: [Routine] { RoutineStore.routines(on: .now, in: context) }
     private var streak: Int { RoutineStore.currentStreak(in: context) }
@@ -21,6 +25,13 @@ struct TodayView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
+                    ProfileHeader(name: profile?.displayName ?? "",
+                                  imageData: profile?.avatarData,
+                                  subtitle: streak > 0 ? "🔥 \(streak)" : nil) {
+                        showProfile = true
+                    }
+                    .padding(.bottom, 2)
+
                     titleBar
                         .padding(.bottom, 4)
 
@@ -47,6 +58,7 @@ struct TodayView: View {
             .navigationBarHidden(true)
             .sheet(item: $logTarget) { RoutineDetailView(routine: $0) }
             .sheet(isPresented: $showNew) { RoutineEditorView(routine: nil, kind: .fitness) }
+            .sheet(isPresented: $showProfile) { ProfileView() }
         }
     }
 

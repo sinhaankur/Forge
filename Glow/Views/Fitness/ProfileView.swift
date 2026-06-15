@@ -1,13 +1,17 @@
 import SwiftUI
 import SwiftData
+import PhotosUI
 
-/// Captures the user's body metrics, experience, injuries, and limitations, and
-/// generates a personalized CrossFit schedule on-device.
+/// Captures the user's identity, body metrics, experience, injuries, and
+/// limitations, and generates a personalized CrossFit schedule on-device.
 struct ProfileView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @Query private var profiles: [UserProfile]
 
+    @State private var displayName = ""
+    @State private var avatarData: Data?
+    @State private var photoItem: PhotosPickerItem?
     @State private var heightCm: Double = 175
     @State private var weightKg: Double = 75
     @State private var bodyShape: BodyShape = .mesomorph
@@ -33,6 +37,23 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section("You") {
+                    HStack(spacing: 14) {
+                        PhotosPicker(selection: $photoItem, matching: .images) {
+                            ZStack(alignment: .bottomTrailing) {
+                                Avatar(name: displayName, imageData: avatarData, size: 64)
+                                Image(systemName: "pencil.circle.fill")
+                                    .font(.system(size: 18))
+                                    .foregroundStyle(GlowTheme.accent)
+                                    .background(Circle().fill(.black))
+                            }
+                        }
+                        TextField("Your name", text: $displayName)
+                            .font(.system(size: 18, weight: .semibold))
+                    }
+                    .padding(.vertical, 4)
+                }
+
                 Section("Body") {
                     Stepper("Height: \(Int(heightCm)) cm", value: $heightCm, in: 130...220)
                     Stepper("Weight: \(Int(weightKg)) kg", value: $weightKg, in: 40...180)
@@ -121,6 +142,17 @@ struct ProfileView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { save(); dismiss() } } }
             .onAppear(perform: load)
+            .onChange(of: photoItem) { _, item in
+                guard let item else { return }
+                Task {
+                    if let data = try? await item.loadTransferable(type: Data.self) {
+                        // Downscale to keep it lightweight.
+                        let img = UIImage(data: data)
+                        let small = img?.preparingThumbnail(of: CGSize(width: 256, height: 256))
+                        await MainActor.run { avatarData = small?.jpegData(compressionQuality: 0.8) ?? data }
+                    }
+                }
+            }
             .fileImporter(
                 isPresented: $showImporter,
                 allowedContentTypes: DNAImporter.allowedTypes,
@@ -200,6 +232,7 @@ struct ProfileView: View {
 
     private func load() {
         guard let p = profiles.first else { return }
+        displayName = p.displayName; avatarData = p.avatarData
         heightCm = p.heightCm; weightKg = p.weightKg
         bodyShape = p.bodyShape; experience = p.experience
         injuries = Set(p.injuries); limitations = p.limitationsNote
@@ -211,6 +244,7 @@ struct ProfileView: View {
 
     private func save() {
         let p = currentProfile()
+        p.displayName = displayName; p.avatarData = avatarData
         p.heightCm = heightCm; p.weightKg = weightKg
         p.bodyShape = bodyShape; p.experience = experience
         p.injuries = Array(injuries); p.limitationsNote = limitations
