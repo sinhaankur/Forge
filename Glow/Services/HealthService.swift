@@ -52,6 +52,7 @@ final class HealthService: ObservableObject {
         if let energy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) { types.insert(energy) }
         if let steps = HKObjectType.quantityType(forIdentifier: .stepCount) { types.insert(steps) }
         if let dist = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) { types.insert(dist) }
+        if let sleep = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) { types.insert(sleep) }
         types.insert(HKObjectType.workoutType())
         return types
     }
@@ -142,6 +143,34 @@ final class HealthService: ObservableObject {
         }
     }
 
+    /// Hours of "asleep" time recorded in Health for last night (on-device).
+    /// Sums asleep samples whose end falls in the last ~18h window.
+    func sleepHoursLastNight() async -> Double {
+        guard isAvailable, isAuthorized,
+              let type = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else { return 0 }
+        let start = Calendar.current.date(byAdding: .hour, value: -18, to: .now)!
+        let predicate = HKQuery.predicateForSamples(withStart: start, end: .now)
+        return await withCheckedContinuation { cont in
+            let q = HKSampleQuery(sampleType: type, predicate: predicate,
+                                  limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, samples, _ in
+                let asleep = (samples as? [HKCategorySample])?.filter { s in
+                    // Treat all "asleep*" categories as sleep time.
+                    if #available(iOS 16, *) {
+                        return [HKCategoryValueSleepAnalysis.asleepCore.rawValue,
+                                HKCategoryValueSleepAnalysis.asleepDeep.rawValue,
+                                HKCategoryValueSleepAnalysis.asleepREM.rawValue,
+                                HKCategoryValueSleepAnalysis.asleepUnspecified.rawValue].contains(s.value)
+                    } else {
+                        return s.value == HKCategoryValueSleepAnalysis.asleep.rawValue
+                    }
+                } ?? []
+                let seconds = asleep.reduce(0.0) { $0 + $1.endDate.timeIntervalSince($1.startDate) }
+                cont.resume(returning: seconds / 3600)
+            }
+            store.execute(q)
+        }
+    }
+
     /// Suggest an achieved value for a routine's target metric from Health data,
     /// so the user doesn't have to type it. Returns 0 when not derivable.
     func suggestedAchievedValue(for metric: TargetMetric) async -> Double {
@@ -205,6 +234,7 @@ final class HealthService: ObservableObject {
     func distanceKmToday() async -> Double { 0 }
     func distanceKmThisWeek() async -> Double { 0 }
     func recentActivities(limit: Int = 10) async -> [ActivitySummary] { [] }
+    func sleepHoursLastNight() async -> Double { 0 }
     func suggestedAchievedValue(for metric: TargetMetric) async -> Double { 0 }
     #endif
 }

@@ -8,7 +8,8 @@ struct GlowApp: App {
     init() {
         do {
             container = try ModelContainer(
-                for: Routine.self, RoutineStep.self, RoutineCompletion.self, Meal.self
+                for: Routine.self, RoutineStep.self, RoutineCompletion.self, Meal.self,
+                UserProfile.self, SleepLog.self
             )
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")

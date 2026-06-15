@@ -447,6 +447,29 @@ final class UserProfile {
     }
 }
 
+// MARK: - Sleep
+
+/// A nightly sleep record. Sourced from Apple Health when available, else logged
+/// manually. One row per night (keyed by the night's wake-day start).
+@Model
+final class SleepLog {
+    /// Start-of-day for the morning the user woke (groups one night).
+    var dayStart: Date
+    var hours: Double
+    /// Optional subjective quality 1–5 (0 = not rated).
+    var quality: Int
+    /// True if this came from Apple Health rather than manual entry.
+    var fromHealth: Bool
+
+    init(dayStart: Date = Calendar.current.startOfDay(for: .now),
+         hours: Double = 0, quality: Int = 0, fromHealth: Bool = false) {
+        self.dayStart = dayStart
+        self.hours = hours
+        self.quality = quality
+        self.fromHealth = fromHealth
+    }
+}
+
 // MARK: - Nutrition
 
 enum MealSlot: String, Codable, CaseIterable, Identifiable {

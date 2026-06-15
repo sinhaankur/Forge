@@ -132,33 +132,63 @@ struct ProfileView: View {
                 Button("OK") {}
             } message: { Text(importMessage) }
             .sheet(isPresented: $showDNAInsights) { DNAInsightsView() }
+            .overlay {
+                if importing {
+                    ZStack {
+                        Color.black.opacity(0.6).ignoresSafeArea()
+                        VStack(spacing: 12) {
+                            ProgressView().tint(GlowTheme.accent)
+                            Text("Reading your DNA on this device…")
+                                .font(GlowTheme.caption()).foregroundStyle(GlowTheme.ink)
+                        }
+                        .padding(24)
+                        .background(GlowTheme.surface)
+                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    }
+                }
+            }
         }
     }
 
     @State private var importAlert = false
     @State private var importMessage = ""
+    @State private var importing = false
 
     private func handleImport(_ result: Result<[URL], Error>) {
         guard case let .success(urls) = result, let url = urls.first else { return }
-        // Security-scoped access for the user-picked file.
-        let scoped = url.startAccessingSecurityScopedResource()
-        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-        guard let text = try? String(contentsOf: url, encoding: .utf8) else {
-            importMessage = "Couldn't read that file. Make sure it's the raw DNA text/CSV export."
-            importAlert = true
-            return
+        importing = true
+        Task {
+            // Read + parse OFF the main thread (files can be ~20MB / 600k lines).
+            let parsed: DNAImporter.Traits? = await Task.detached(priority: .userInitiated) {
+                let scoped = url.startAccessingSecurityScopedResource()
+                defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+                guard let text = try? String(contentsOf: url, encoding: .utf8) else { return nil }
+                return DNAImporter.parse(text)
+            }.value
+
+            await MainActor.run {
+                importing = false
+                guard let traits = parsed else {
+                    importMessage = "Couldn't read that file. Pick the raw DNA text/CSV export (23andMe, AncestryDNA, MyHeritage)."
+                    importAlert = true
+                    return
+                }
+                if let a = traits.aerobic { aerobic = a }
+                if let c = traits.caffeine { caffeine = c }
+                if let cb = traits.carb { carb = cb }
+                if let l = traits.lactoseTolerant { lactoseTolerant = l }
+                if let vd = traits.vitaminD { vitaminD = vd }
+                if let b = traits.b12 { b12 = b }
+                save()
+                if traits.foundCount > 0 {
+                    // Jump straight to the visualization on success.
+                    showDNAInsights = true
+                } else {
+                    importMessage = traits.summary
+                    importAlert = true
+                }
+            }
         }
-        let traits = DNAImporter.parse(text)
-        // Apply only the traits we could derive; leave others untouched.
-        if let a = traits.aerobic { aerobic = a }
-        if let c = traits.caffeine { caffeine = c }
-        if let cb = traits.carb { carb = cb }
-        if let l = traits.lactoseTolerant { lactoseTolerant = l }
-        if let vd = traits.vitaminD { vitaminD = vd }
-        if let b = traits.b12 { b12 = b }
-        save()
-        importMessage = traits.summary
-        importAlert = true
     }
 
     private func currentProfile() -> UserProfile {

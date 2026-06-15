@@ -12,9 +12,13 @@ enum DNAImporter {
 
     /// File types the picker accepts. 23andMe ships `.txt`, AncestryDNA `.csv`,
     /// some are `.tsv`; allow plain text + comma/tab-separated + zip-less exports.
+    /// Accept essentially any file — DNA exports come as .txt/.csv/.tsv and even
+    /// extensionless, and some are zipped. Allowing `.data`/`.item` ensures the
+    /// file is never greyed-out/un-tappable in the picker; we validate on read.
     static var allowedTypes: [UTType] {
-        var types: [UTType] = [.plainText, .commaSeparatedText, .text]
+        var types: [UTType] = [.plainText, .commaSeparatedText, .tabSeparatedText, .text, .data, .item]
         if let tsv = UTType(filenameExtension: "tsv") { types.append(tsv) }
+        if let zip = UTType(filenameExtension: "zip") { types.append(zip) }
         return types
     }
 
