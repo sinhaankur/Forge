@@ -60,7 +60,7 @@ final class ConnectivityService: NSObject, ObservableObject {
             session.sendMessage(["command": data], replyHandler: nil, errorHandler: nil)
         } else {
             // Queue for delivery when the counterpart becomes available.
-            try? session.transferUserInfo(["command": data]) as Void
+            session.transferUserInfo(["command": data])
         }
     }
 

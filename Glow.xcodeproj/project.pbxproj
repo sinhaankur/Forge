@@ -1,0 +1,578 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01A499FCBA1ED1DD2AD364EF /* WatchTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25EDC2A0346893202290AAF /* WatchTodayView.swift */; };
+		04395F109ECA9AE4C0774084 /* SeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC645E1B744A6119AAB83D /* SeedData.swift */; };
+		0B38F4642573228208C53228 /* GlowWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443C476B479F7D53E601169 /* GlowWatchApp.swift */; };
+		0FD74D036C9FE7D5FBE5AFC7 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A3CDDB9E26833116B9D8B /* Theme.swift */; };
+		31582F7D4E1333D21BCEF125 /* ExerciseLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE73483D57BE0EA6FE77081 /* ExerciseLibrary.swift */; };
+		4019B79AD720466260102181 /* RoutineEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120F66922A26226C23018ECE /* RoutineEditorView.swift */; };
+		41D3C61B7E4AD10FC157A05C /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989499BF48E7A9F77B46AFA3 /* RoutineListView.swift */; };
+		43011833D438BBA9A49F0843 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF1A2B7E02F330EE0102990 /* Assets.xcassets */; };
+		4DE123F42B05934EAE40E2D0 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBEC316AEE6C7DFF861D088 /* NotificationService.swift */; };
+		5DBF7D4E2ED3D22D36FA087E /* WatchTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1A4EA56CB728409AF7D1ED /* WatchTheme.swift */; };
+		6506C14E7932B71E1959639F /* GlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF3CFA9B54DCDD325C84B6F /* GlowApp.swift */; };
+		730B1FCDEBEB3ABD4C932B7E /* ProgressView_Glow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116710BA4B26BF40F2112201 /* ProgressView_Glow.swift */; };
+		7B12CEEA06FA83C541D95CDD /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921B0EC3338EAA4A0D74D1B2 /* HealthService.swift */; };
+		82C886EB8F6726779C5AA8E5 /* WorkoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF5F4810C0751242C165776 /* WorkoutGenerator.swift */; };
+		A08516D26DC5F62A20230E1A /* NutritionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BADD9BDDBB84C18E677D64 /* NutritionView.swift */; };
+		B4E5A50BE8792D4CE9D620E5 /* ConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E60DFC8E65C41F070E53BA5 /* ConnectivityService.swift */; };
+		BEDB4015A97D32F90640F55D /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48385C23F8CA3C568C55A904 /* TodayView.swift */; };
+		C0079BCBE81C819B2BAC9B45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 900FE412AD602D8D0CC8500A /* Assets.xcassets */; };
+		C2EE056B3647BCC06902412A /* GlowWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B609E0196A0841D4ADE9A5FD /* GlowWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CDF9BC8EF1A57E1EC366C197 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A65F0A8E64844F202FE4E9 /* ProfileView.swift */; };
+		D8B992BAD1DB43F805933CF6 /* DateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDBD9D923C4E1631BFC1382 /* DateHeader.swift */; };
+		E52218F2606BED808397C1D4 /* ConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E60DFC8E65C41F070E53BA5 /* ConnectivityService.swift */; };
+		EA33128BD6A7098991939D5B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A79AF5A619FBDE9033F1F2 /* Models.swift */; };
+		F422078EF68C5AEA30A514DD /* RoutineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0545671B4B579D3C87668B /* RoutineStore.swift */; };
+		F765EBA374098BFC155D9386 /* RoutineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63C99717DCF4C301A0C993E /* RoutineDetailView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		75F09B017AD875297FC0EA7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF36CFF24B7452B3462358E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 54A99A2256E4F89346A368E9;
+			remoteInfo = GlowWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B2A881DE30CC5A44A405AB79 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				C2EE056B3647BCC06902412A /* GlowWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		039BCB10FA6F762119E8EF57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0C223564EEBED64C6AE29894 /* Glow.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Glow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		116710BA4B26BF40F2112201 /* ProgressView_Glow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView_Glow.swift; sourceTree = "<group>"; };
+		120F66922A26226C23018ECE /* RoutineEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineEditorView.swift; sourceTree = "<group>"; };
+		1443C476B479F7D53E601169 /* GlowWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowWatchApp.swift; sourceTree = "<group>"; };
+		1DBEC316AEE6C7DFF861D088 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		3BF1A2B7E02F330EE0102990 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		43EC645E1B744A6119AAB83D /* SeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedData.swift; sourceTree = "<group>"; };
+		48385C23F8CA3C568C55A904 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		48A65F0A8E64844F202FE4E9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		4B41B87E9E9F5DE26F2F41CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4E60DFC8E65C41F070E53BA5 /* ConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityService.swift; sourceTree = "<group>"; };
+		5E0A3CDDB9E26833116B9D8B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		7FE73483D57BE0EA6FE77081 /* ExerciseLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibrary.swift; sourceTree = "<group>"; };
+		7FF5F4810C0751242C165776 /* WorkoutGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGenerator.swift; sourceTree = "<group>"; };
+		8AF3CFA9B54DCDD325C84B6F /* GlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowApp.swift; sourceTree = "<group>"; };
+		8F0545671B4B579D3C87668B /* RoutineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineStore.swift; sourceTree = "<group>"; };
+		900FE412AD602D8D0CC8500A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		921B0EC3338EAA4A0D74D1B2 /* HealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
+		96BADD9BDDBB84C18E677D64 /* NutritionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionView.swift; sourceTree = "<group>"; };
+		989499BF48E7A9F77B46AFA3 /* RoutineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListView.swift; sourceTree = "<group>"; };
+		98993579F72611E04B53CDED /* Glow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Glow.entitlements; sourceTree = "<group>"; };
+		B25EDC2A0346893202290AAF /* WatchTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTodayView.swift; sourceTree = "<group>"; };
+		B609E0196A0841D4ADE9A5FD /* GlowWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlowWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B63C99717DCF4C301A0C993E /* RoutineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailView.swift; sourceTree = "<group>"; };
+		BBDBD9D923C4E1631BFC1382 /* DateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeader.swift; sourceTree = "<group>"; };
+		C6A79AF5A619FBDE9033F1F2 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		CC1A4EA56CB728409AF7D1ED /* WatchTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTheme.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		39CCB691C58407790267C85E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5E0A3CDDB9E26833116B9D8B /* Theme.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		53CC3AAEEF56DEF43A37EA04 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				116710BA4B26BF40F2112201 /* ProgressView_Glow.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		541AA912A23F49A9F25B6110 /* GlowWatch */ = {
+			isa = PBXGroup;
+			children = (
+				900FE412AD602D8D0CC8500A /* Assets.xcassets */,
+				1443C476B479F7D53E601169 /* GlowWatchApp.swift */,
+				039BCB10FA6F762119E8EF57 /* Info.plist */,
+				CC1A4EA56CB728409AF7D1ED /* WatchTheme.swift */,
+				B25EDC2A0346893202290AAF /* WatchTodayView.swift */,
+			);
+			path = GlowWatch;
+			sourceTree = "<group>";
+		};
+		5C167A7F540CA14AD2097A4E /* Glow */ = {
+			isa = PBXGroup;
+			children = (
+				3BF1A2B7E02F330EE0102990 /* Assets.xcassets */,
+				98993579F72611E04B53CDED /* Glow.entitlements */,
+				8AF3CFA9B54DCDD325C84B6F /* GlowApp.swift */,
+				4B41B87E9E9F5DE26F2F41CC /* Info.plist */,
+				8C4F8EEE677A4E87A6D214C3 /* Models */,
+				39CCB691C58407790267C85E /* Resources */,
+				9770D2D167290F965622A442 /* Services */,
+				9D3DAA4BCDF37FF1466FEDF1 /* Views */,
+			);
+			path = Glow;
+			sourceTree = "<group>";
+		};
+		678EA5AFA928BF922AA5AA32 /* Fitness */ = {
+			isa = PBXGroup;
+			children = (
+				48A65F0A8E64844F202FE4E9 /* ProfileView.swift */,
+				120F66922A26226C23018ECE /* RoutineEditorView.swift */,
+				989499BF48E7A9F77B46AFA3 /* RoutineListView.swift */,
+			);
+			path = Fitness;
+			sourceTree = "<group>";
+		};
+		7B2C09ECD91A6F47DA28E7F3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BBDBD9D923C4E1631BFC1382 /* DateHeader.swift */,
+				B63C99717DCF4C301A0C993E /* RoutineDetailView.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		7EFAA7FE354AD4D5F1AADD96 = {
+			isa = PBXGroup;
+			children = (
+				5C167A7F540CA14AD2097A4E /* Glow */,
+				541AA912A23F49A9F25B6110 /* GlowWatch */,
+				FB0DC75D1965ABA500F4F076 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8C4F8EEE677A4E87A6D214C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C6A79AF5A619FBDE9033F1F2 /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9770D2D167290F965622A442 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4E60DFC8E65C41F070E53BA5 /* ConnectivityService.swift */,
+				7FE73483D57BE0EA6FE77081 /* ExerciseLibrary.swift */,
+				921B0EC3338EAA4A0D74D1B2 /* HealthService.swift */,
+				1DBEC316AEE6C7DFF861D088 /* NotificationService.swift */,
+				8F0545671B4B579D3C87668B /* RoutineStore.swift */,
+				43EC645E1B744A6119AAB83D /* SeedData.swift */,
+				7FF5F4810C0751242C165776 /* WorkoutGenerator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9D3DAA4BCDF37FF1466FEDF1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				96BADD9BDDBB84C18E677D64 /* NutritionView.swift */,
+				48385C23F8CA3C568C55A904 /* TodayView.swift */,
+				678EA5AFA928BF922AA5AA32 /* Fitness */,
+				53CC3AAEEF56DEF43A37EA04 /* Progress */,
+				7B2C09ECD91A6F47DA28E7F3 /* Shared */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FB0DC75D1965ABA500F4F076 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C223564EEBED64C6AE29894 /* Glow.app */,
+				B609E0196A0841D4ADE9A5FD /* GlowWatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		54A99A2256E4F89346A368E9 /* GlowWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B718BDD02BEC6199A96329C8 /* Build configuration list for PBXNativeTarget "GlowWatch" */;
+			buildPhases = (
+				5B3615F281C0EF39B4EAF7BF /* Sources */,
+				9BD15FFFF255E34609294FBB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GlowWatch;
+			packageProductDependencies = (
+			);
+			productName = GlowWatch;
+			productReference = B609E0196A0841D4ADE9A5FD /* GlowWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D8B26740CAB956DDDCF0D308 /* Glow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE1BA3081460F0FD6659E9CE /* Build configuration list for PBXNativeTarget "Glow" */;
+			buildPhases = (
+				C1B31A4C65D364170CD10953 /* Sources */,
+				B334C7833323C73D058715E9 /* Resources */,
+				B2A881DE30CC5A44A405AB79 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED83478FD57396B63E7D37A9 /* PBXTargetDependency */,
+			);
+			name = Glow;
+			packageProductDependencies = (
+			);
+			productName = Glow;
+			productReference = 0C223564EEBED64C6AE29894 /* Glow.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FF36CFF24B7452B3462358E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					54A99A2256E4F89346A368E9 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					D8B26740CAB956DDDCF0D308 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7A33481E0481A2B7DC133E53 /* Build configuration list for PBXProject "Glow" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7EFAA7FE354AD4D5F1AADD96;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FB0DC75D1965ABA500F4F076 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D8B26740CAB956DDDCF0D308 /* Glow */,
+				54A99A2256E4F89346A368E9 /* GlowWatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9BD15FFFF255E34609294FBB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0079BCBE81C819B2BAC9B45 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B334C7833323C73D058715E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43011833D438BBA9A49F0843 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5B3615F281C0EF39B4EAF7BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4E5A50BE8792D4CE9D620E5 /* ConnectivityService.swift in Sources */,
+				0B38F4642573228208C53228 /* GlowWatchApp.swift in Sources */,
+				5DBF7D4E2ED3D22D36FA087E /* WatchTheme.swift in Sources */,
+				01A499FCBA1ED1DD2AD364EF /* WatchTodayView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1B31A4C65D364170CD10953 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E52218F2606BED808397C1D4 /* ConnectivityService.swift in Sources */,
+				D8B992BAD1DB43F805933CF6 /* DateHeader.swift in Sources */,
+				31582F7D4E1333D21BCEF125 /* ExerciseLibrary.swift in Sources */,
+				6506C14E7932B71E1959639F /* GlowApp.swift in Sources */,
+				7B12CEEA06FA83C541D95CDD /* HealthService.swift in Sources */,
+				EA33128BD6A7098991939D5B /* Models.swift in Sources */,
+				4DE123F42B05934EAE40E2D0 /* NotificationService.swift in Sources */,
+				A08516D26DC5F62A20230E1A /* NutritionView.swift in Sources */,
+				CDF9BC8EF1A57E1EC366C197 /* ProfileView.swift in Sources */,
+				730B1FCDEBEB3ABD4C932B7E /* ProgressView_Glow.swift in Sources */,
+				F765EBA374098BFC155D9386 /* RoutineDetailView.swift in Sources */,
+				4019B79AD720466260102181 /* RoutineEditorView.swift in Sources */,
+				41D3C61B7E4AD10FC157A05C /* RoutineListView.swift in Sources */,
+				F422078EF68C5AEA30A514DD /* RoutineStore.swift in Sources */,
+				04395F109ECA9AE4C0774084 /* SeedData.swift in Sources */,
+				0FD74D036C9FE7D5FBE5AFC7 /* Theme.swift in Sources */,
+				BEDB4015A97D32F90640F55D /* TodayView.swift in Sources */,
+				82C886EB8F6726779C5AA8E5 /* WorkoutGenerator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ED83478FD57396B63E7D37A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 54A99A2256E4F89346A368E9 /* GlowWatch */;
+			targetProxy = 75F09B017AD875297FC0EA7D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0CC7524AF8A36CD71A1F535B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GlowWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sinhaankur.glow.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		307CF9B4BA03F800E93AA340 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Glow/Glow.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Glow/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sinhaankur.glow;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4F6038228BEA52498452B97C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		9A430A30766519C286FF1469 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Glow/Glow.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Glow/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sinhaankur.glow;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A11C0F7ABE0C08CA74111C45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GlowWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sinhaankur.glow.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		CE7121FB1F5CDECC9D8A6606 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7A33481E0481A2B7DC133E53 /* Build configuration list for PBXProject "Glow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE7121FB1F5CDECC9D8A6606 /* Debug */,
+				4F6038228BEA52498452B97C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B718BDD02BEC6199A96329C8 /* Build configuration list for PBXNativeTarget "GlowWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A11C0F7ABE0C08CA74111C45 /* Debug */,
+				0CC7524AF8A36CD71A1F535B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DE1BA3081460F0FD6659E9CE /* Build configuration list for PBXNativeTarget "Glow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A430A30766519C286FF1469 /* Debug */,
+				307CF9B4BA03F800E93AA340 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FF36CFF24B7452B3462358E4 /* Project object */;
+}

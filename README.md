@@ -44,8 +44,13 @@ Branding/            Brand guide & logo
 
 ## Status
 
-Source + branding are complete. The Xcode project (iOS + watchOS targets) and
-TestFlight configuration are being added next — see `SETUP.md` once available.
+Complete and **building for the Simulator** (iOS app + embedded watchOS app).
+The project is generated from `project.yml` via [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+See **[SETUP.md](SETUP.md)** to open, run, and ship to TestFlight.
+
+```bash
+brew install xcodegen && cd Glow && xcodegen generate && open Glow.xcodeproj
+```
 
 > Not medical advice. Consult a professional before starting any exercise or
 > nutrition program, especially with existing injuries.
