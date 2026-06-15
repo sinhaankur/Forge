@@ -9,9 +9,18 @@ enum SeedData {
     static func seedIfNeeded(_ context: ModelContext) {
         let routineCount = (try? context.fetchCount(FetchDescriptor<Routine>())) ?? 0
         let mealCount = (try? context.fetchCount(FetchDescriptor<Meal>())) ?? 0
+        let profileCount = (try? context.fetchCount(FetchDescriptor<UserProfile>())) ?? 0
         if routineCount == 0 { seedRoutines(context) }
         if mealCount == 0 { seedMeals(context) }
+        if profileCount == 0 { seedProfile(context) }
         try? context.save()
+    }
+
+    /// Seed a starter profile with sensible defaults. Genetic-trait fields are
+    /// left unset (.unknown) — the user fills them by uploading their DNA file
+    /// or tapping "Apply my DNA markers". (No genotypes are stored in code.)
+    private static func seedProfile(_ context: ModelContext) {
+        context.insert(UserProfile())
     }
 
     // MARK: Fitness + Skincare routines

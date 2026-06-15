@@ -25,6 +25,7 @@
 		6F4CB9ABA5F0D9428869C46B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D82A40972609BE5B64925B3C /* Assets.xcassets */; };
 		7818CEB07DBD388AA52E7B97 /* WatchTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5E63084A11FE7DA12C86F /* WatchTodayView.swift */; };
 		8DE75CBBAED5A450CC594B62 /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E38F3F45E856BED97F187A /* RoutineListView.swift */; };
+		93BA021775AC6501A9B2AA90 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E14CC2A1677F706B152395 /* WelcomeView.swift */; };
 		AA0C702B7D42D652DBC857A3 /* RoutineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */; };
 		BA39F19BAD0871C12740391E /* DNAInsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873682C642D8FE4D265FFD1E /* DNAInsightsView.swift */; };
 		D00A7883601D70924829FEF0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2275A20906FE573CA34EA09 /* ProfileView.swift */; };
@@ -73,6 +74,7 @@
 		449D30E56CC59E43B975A2A4 /* Glow.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Glow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		506F3C9A8EA91F4160FDF4E9 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		50CF8ABD2D03DBFDD385C368 /* GlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowApp.swift; sourceTree = "<group>"; };
+		51E14CC2A1677F706B152395 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		51E636296A862020AC334545 /* GlowWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlowWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineStore.swift; sourceTree = "<group>"; };
 		6E3237A42A929FCE680185A5 /* ConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityService.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				2B61EB89A6E2875B55709449 /* NutritionView.swift */,
 				22B0A67DFD89A8755B6BDA77 /* TodayView.swift */,
+				51E14CC2A1677F706B152395 /* WelcomeView.swift */,
 				7DD4AE7D7E16933F66F347AC /* Fitness */,
 				46C9C7B91150DE6CAB230F3E /* Progress */,
 				2E8B87995E96F56D31F345DA /* Shared */,
@@ -333,6 +336,7 @@
 				60D7BE8C99F9142CF0908A77 /* SeedData.swift in Sources */,
 				1DE8CC05014E1AE135716EA3 /* Theme.swift in Sources */,
 				524CAC818E4DF5F92B9DEAE4 /* TodayView.swift in Sources */,
+				93BA021775AC6501A9B2AA90 /* WelcomeView.swift in Sources */,
 				F2178C105BBB63166F814303 /* WorkoutGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

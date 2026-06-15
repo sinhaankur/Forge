@@ -7,17 +7,17 @@ enum GlowTheme {
 
     // MARK: Accent
 
-    /// Electric orange hero accent (dark-first design).
-    static let orange = Color(hex: "#FF3B0F")
-    static let orangeBright = Color(hex: "#FF5A2C")
+    /// Electric cyan-teal hero accent (dark-first design).
+    static let teal = Color(hex: "#19E3C2")
+    static let tealBright = Color(hex: "#3DF0D6")
 
     /// The accent gradient — used for rings, primary actions, key numerals.
     static var accentGradient: LinearGradient {
-        LinearGradient(colors: [orange, orangeBright], startPoint: .leading, endPoint: .trailing)
+        LinearGradient(colors: [teal, tealBright], startPoint: .leading, endPoint: .trailing)
     }
 
     /// Flat accent for text / small marks.
-    static let accent = orange
+    static let accent = teal
 
     // MARK: Dark-first surfaces (forced dark regardless of system setting)
 
@@ -113,15 +113,33 @@ struct GlowDot: View {
     }
 }
 
-/// The Glow mark: a filled accent dot with a small flame — fits the dot-calendar motif.
+/// The Forge mark: three ascending chevrons (level-up / forward motion) in the
+/// accent gradient — matches the app icon.
 struct GlowMark: View {
     var size: CGFloat = 64
     var body: some View {
-        ZStack {
-            Circle().fill(GlowTheme.accentGradient)
-            Image(systemName: "flame.fill")
-                .font(.system(size: size * 0.42, weight: .bold))
-                .foregroundStyle(.white)
+        Canvas { ctx, canvas in
+            let w = canvas.width
+            let cx = w / 2
+            let armW = w * 0.30
+            let thick = w * 0.10
+            let rise = w * 0.16
+            let gradient = GraphicsContext.Shading.linearGradient(
+                Gradient(colors: [GlowTheme.teal, GlowTheme.tealBright]),
+                startPoint: .zero, endPoint: CGPoint(x: w, y: canvas.height))
+            for (i, baseY) in [0.30, 0.52, 0.74].enumerated() {
+                _ = i
+                let y = canvas.height * baseY
+                var p = Path()
+                p.move(to: CGPoint(x: cx - armW, y: y))
+                p.addLine(to: CGPoint(x: cx, y: y + rise))
+                p.addLine(to: CGPoint(x: cx + armW, y: y))
+                p.addLine(to: CGPoint(x: cx + armW, y: y - thick))
+                p.addLine(to: CGPoint(x: cx, y: y + rise - thick))
+                p.addLine(to: CGPoint(x: cx - armW, y: y - thick))
+                p.closeSubpath()
+                ctx.fill(p, with: gradient)
+            }
         }
         .frame(width: size, height: size)
     }

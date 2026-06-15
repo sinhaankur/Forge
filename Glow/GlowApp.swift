@@ -30,6 +30,7 @@ struct GlowApp: App {
 struct RootView: View {
     @Environment(\.modelContext) private var context
     @Query private var routines: [Routine]
+    @AppStorage("hasSeenWelcome") private var hasSeenWelcome = false
 
     var body: some View {
         TabView {
@@ -47,6 +48,9 @@ struct RootView: View {
 
             ProgressView_Glow()
                 .tabItem { Label("Progress", systemImage: "chart.bar.fill") }
+        }
+        .fullScreenCover(isPresented: .init(get: { !hasSeenWelcome }, set: { _ in })) {
+            WelcomeView { hasSeenWelcome = true }
         }
         .task {
             await NotificationService.shared.requestAuthorization()

@@ -74,10 +74,12 @@ struct ProfileView: View {
                         Label("Upload DNA / CSV file", systemImage: "square.and.arrow.up")
                     }
                     Button {
-                        // Quick-apply demo markers (endurance-leaning, dairy-friendly).
-                        aerobic = .high; caffeine = .fast; carb = .resilient; lactoseTolerant = true
+                        // Endurance-leaning preset (high aerobic, fast caffeine,
+                        // carb-resilient). Matches a PPARGC1A/CYP1A2/FTO favorable profile.
+                        aerobic = .high; caffeine = .fast; carb = .resilient
+                        lactoseTolerant = false; vitaminD = .normal; b12 = .efficient
                     } label: {
-                        Label("Apply my DNA markers", systemImage: "sparkles")
+                        Label("Apply endurance preset", systemImage: "sparkles")
                     }
                     Picker("Aerobic response", selection: $aerobic) {
                         ForEach(AerobicResponse.allCases) { Text($0.title).tag($0) }
