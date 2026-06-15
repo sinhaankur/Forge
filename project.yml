@@ -46,7 +46,10 @@ targets:
         NSHealthShareUsageDescription: "Forge reads your active energy, steps, sleep, and workouts on this device to fill in progress and readiness. This data never leaves your iPhone."
         NSHealthUpdateUsageDescription: "Forge does not write any data to Health. It only reads, on your device."
         NSCalendarsUsageDescription: "Forge reads your calendar on this device to find free time around your meetings and schedule workout & warm-up reminders. Your events never leave your iPhone."
+        NSCalendarsFullAccessUsageDescription: "Forge reads your calendar on this device to find free time around your meetings and schedule workout & warm-up reminders. Your events never leave your iPhone."
         NSRemindersFullAccessUsageDescription: "Forge can read your calendar to plan reminders around your day. Nothing leaves your device."
+        NSPhotoLibraryUsageDescription: "Forge lets you pick a profile photo. The image is stored only on this device."
+        NSMotionUsageDescription: "Forge reads your motion & fitness activity (steps, walking/running) on this device to track your daily movement and recovery. This never leaves your iPhone."
 
   # ---------------- watchOS app ----------------
   GlowWatch:

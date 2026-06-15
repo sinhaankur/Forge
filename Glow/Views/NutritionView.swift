@@ -24,8 +24,8 @@ struct NutritionView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    Text("NUTRITION")
-                        .font(GlowTheme.display())
+                    Text("Nutrition")
+                        .font(.system(size: 34, weight: .heavy))
                         .foregroundStyle(GlowTheme.ink)
                         .padding(.top, 8)
 

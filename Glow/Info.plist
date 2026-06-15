@@ -20,12 +20,18 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Forge reads your calendar on this device to find free time around your meetings and schedule workout &amp; warm-up reminders. Your events never leave your iPhone.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Forge reads your calendar on this device to find free time around your meetings and schedule workout &amp; warm-up reminders. Your events never leave your iPhone.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Forge reads your active energy, steps, sleep, and workouts on this device to fill in progress and readiness. This data never leaves your iPhone.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Forge does not write any data to Health. It only reads, on your device.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Forge reads your motion &amp; fitness activity (steps, walking/running) on this device to track your daily movement and recovery. This never leaves your iPhone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Forge lets you pick a profile photo. The image is stored only on this device.</string>
 	<key>NSRemindersFullAccessUsageDescription</key>
 	<string>Forge can read your calendar to plan reminders around your day. Nothing leaves your device.</string>
 	<key>UIApplicationSceneManifest</key>

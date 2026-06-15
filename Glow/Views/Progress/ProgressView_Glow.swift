@@ -7,6 +7,7 @@ struct ProgressView_Glow: View {
     @Environment(\.modelContext) private var context
     @Query private var completions: [RoutineCompletion]
     @StateObject private var health = HealthService.shared
+    @StateObject private var motion = MotionService.shared
     @State private var activeEnergy: Double = 0
     @State private var steps: Double = 0
     @State private var weekDistance: Double = 0
@@ -29,8 +30,8 @@ struct ProgressView_Glow: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("PROGRESS")
-                        .font(GlowTheme.display())
+                    Text("Progress")
+                        .font(.system(size: 34, weight: .heavy))
                         .foregroundStyle(GlowTheme.ink)
                         .padding(.top, 8)
 
@@ -53,6 +54,14 @@ struct ProgressView_Glow: View {
                                      systemImage: "figure.walk", style: .light)
                             StatCard(label: "Distance · 7d", value: String(format: "%.1f", weekDistance), unit: "km",
                                      systemImage: "map.fill", style: .accent)
+                        }
+                    } else if motion.isAvailable {
+                        // Free-account fallback: CoreMotion pedometer (no HealthKit needed).
+                        LazyVGrid(columns: columns, spacing: 12) {
+                            StatCard(label: "Steps Today", value: "\(motion.stepsToday)", unit: "",
+                                     systemImage: "figure.walk", style: .accent)
+                            StatCard(label: "Distance Today", value: String(format: "%.1f", motion.distanceKmToday), unit: "km",
+                                     systemImage: "map.fill", style: .light)
                         }
                     }
 
@@ -80,6 +89,8 @@ struct ProgressView_Glow: View {
                 steps = await health.stepsToday()
                 weekDistance = await health.distanceKmThisWeek()
                 activities = await health.recentActivities(limit: 8)
+                // Free-account activity fallback.
+                if !health.isAvailable { await motion.refreshToday() }
             }
         }
     }
