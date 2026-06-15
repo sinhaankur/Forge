@@ -23,17 +23,23 @@ enum WorkoutGenerator {
         let days = max(1, min(7, profile.daysPerWeek))
         // Spread across the week (e.g. 4 days -> Mon/Tue/Thu/Fri-ish).
         let weekdayPlan = distribute(days: days)
-        let themes = Theme.allCases
+        // Theme rotation is tuned to the user's aerobic response (from genetics).
+        let themes = themeRotation(for: profile)
+
+        // Optional pre-workout note for fast caffeine metabolizers.
+        let caffeineNote = profile.caffeine == .fast
+            ? " Pre-workout: a black coffee ~30–45 min before works well for you (fast caffeine metabolizer)."
+            : ""
 
         for i in 0..<days {
             let theme = themes[i % themes.count]
             let weekday = weekdayPlan[i]
 
             let routine = Routine(
-                name: "CrossFit · \(theme.rawValue)",
+                name: "Forge · \(theme.rawValue)",
                 kind: .fitness,
                 timeOfDay: .morning,
-                notes: "\(marker) for \(profile.bodyShape.title), BMI \(String(format: "%.0f", profile.bmi)). Warm-up included.",
+                notes: "\(marker) for \(profile.bodyShape.title), BMI \(String(format: "%.0f", profile.bmi)). Warm-up included.\(caffeineNote)",
                 colorHex: "#FF7E5F",
                 activeWeekdays: [weekday],
                 reminderMinutes: 7 * 60,
@@ -73,6 +79,19 @@ enum WorkoutGenerator {
             cool.routine = routine; routine.steps.append(cool)
         }
         try? context.save()
+    }
+
+    /// Order the weekly themes based on the user's aerobic genetics.
+    /// High aerobic response → a hybrid that leans into engine / zone-2 work
+    /// alongside strength (their muscles adapt well to oxygen-demanding training).
+    private static func themeRotation(for profile: UserProfile) -> [Theme] {
+        switch profile.aerobic {
+        case .high:
+            // Strength + lots of engine, interleaved with metcon/gymnastics.
+            return [.strength, .engine, .metcon, .engine, .gymnastics, .fullBody]
+        case .normal, .unknown:
+            return [.strength, .metcon, .gymnastics, .engine, .fullBody]
+        }
     }
 
     private static func targetMetric(for theme: Theme) -> TargetMetric {

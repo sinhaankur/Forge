@@ -15,6 +15,10 @@ struct ProfileView: View {
     @State private var injuries: Set<InjuryArea> = []
     @State private var limitations = ""
     @State private var daysPerWeek = 4
+    @State private var aerobic: AerobicResponse = .unknown
+    @State private var caffeine: CaffeineMetabolism = .unknown
+    @State private var carb: CarbResponse = .unknown
+    @State private var lactoseTolerant = false
     @State private var generated = false
 
     private var bmi: Double {
@@ -57,6 +61,21 @@ struct ProfileView: View {
                     TextField("Other limitations (free text)", text: $limitations, axis: .vertical)
                 }
 
+                Section("Genetic insights (optional)") {
+                    Text("If you know these from a DNA report, Forge tunes your plan. Stored only on this device — never uploaded.")
+                        .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                    Picker("Aerobic response", selection: $aerobic) {
+                        ForEach(AerobicResponse.allCases) { Text($0.title).tag($0) }
+                    }
+                    Picker("Caffeine metabolism", selection: $caffeine) {
+                        ForEach(CaffeineMetabolism.allCases) { Text($0.title).tag($0) }
+                    }
+                    Picker("Carb response", selection: $carb) {
+                        ForEach(CarbResponse.allCases) { Text($0.title).tag($0) }
+                    }
+                    Toggle("Lactose tolerant (dairy OK)", isOn: $lactoseTolerant)
+                }
+
                 Section {
                     Button {
                         save(); generate()
@@ -90,6 +109,8 @@ struct ProfileView: View {
         bodyShape = p.bodyShape; experience = p.experience
         injuries = Set(p.injuries); limitations = p.limitationsNote
         daysPerWeek = p.daysPerWeek
+        aerobic = p.aerobic; caffeine = p.caffeine
+        carb = p.carb; lactoseTolerant = p.lactoseTolerant
     }
 
     private func save() {
@@ -98,6 +119,8 @@ struct ProfileView: View {
         p.bodyShape = bodyShape; p.experience = experience
         p.injuries = Array(injuries); p.limitationsNote = limitations
         p.daysPerWeek = daysPerWeek
+        p.aerobic = aerobic; p.caffeine = caffeine
+        p.carb = carb; p.lactoseTolerant = lactoseTolerant
         try? context.save()
     }
 
