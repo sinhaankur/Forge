@@ -14,6 +14,7 @@ struct RoutineDetailView: View {
     @State private var checked: Set<PersistentIdentifier> = []
     @State private var achieved = ""
     @State private var howToStep: RoutineStep?
+    @State private var showFocus = false
 
     private var boosts: [HormoneInsight.Boost] {
         HormoneInsight.boosts(for: routine, profile: profiles.first)
@@ -33,6 +34,18 @@ struct RoutineDetailView: View {
                         Text(routine.notes)
                             .font(GlowTheme.body(15))
                             .foregroundStyle(GlowTheme.inkMuted)
+                    }
+
+                    if !routine.orderedSteps.isEmpty {
+                        Button { showFocus = true } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: "play.fill")
+                                Text("Start guided session").font(GlowTheme.headline())
+                            }
+                            .frame(maxWidth: .infinity).padding(.vertical, 16)
+                            .foregroundStyle(.black).background(GlowTheme.accentGradient)
+                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                        }
                     }
 
                     if !boosts.isEmpty { moodBoostCard }
@@ -67,6 +80,9 @@ struct RoutineDetailView: View {
             }
             .sheet(item: $howToStep) { step in
                 ExerciseDetailView(stepTitle: step.title, summary: step.summary)
+            }
+            .fullScreenCover(isPresented: $showFocus) {
+                FocusSessionView(routine: routine)
             }
             .task {
                 if routine.hasTarget, let m = routine.targetMetric, achieved.isEmpty {
@@ -169,7 +185,8 @@ struct RoutineDetailView: View {
 
     private func complete() {
         let value = Double(achieved) ?? 0
-        RoutineStore.toggleCompletion(routine, on: .now, achievedValue: value, in: context)
+        let nowDone = RoutineStore.toggleCompletion(routine, on: .now, achievedValue: value, in: context)
+        if nowDone { Haptics.celebrate() } else { Haptics.tap() }
         ConnectivityService.shared.push(RoutineStore.snapshot(in: context))
         dismiss()
     }
