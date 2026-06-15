@@ -69,6 +69,10 @@ struct ProgressView_Glow: View {
                         ActivitiesPanel(activities: activities)
                     }
 
+                    if !motion.activityMinutes.isEmpty {
+                        ActivityTimelinePanel(minutes: motion.activityMinutes)
+                    }
+
                     ConsistencyCalendar(completedDays: RoutineStore.completedDays(in: context))
 
                     Button { showPrivacy = true } label: {
@@ -91,6 +95,7 @@ struct ProgressView_Glow: View {
                 activities = await health.recentActivities(limit: 8)
                 // Free-account activity fallback.
                 if !health.isAvailable { await motion.refreshToday() }
+                await motion.refreshActivityTimeline()
             }
         }
     }
@@ -134,6 +139,60 @@ struct ActivitiesPanel: View {
                 }
             }
         }
+    }
+}
+
+/// Today's activity-type breakdown (driving / walking / running / cycling /
+/// sitting-still) classified by CoreMotion from phone + wrist motion. On-device.
+struct ActivityTimelinePanel: View {
+    let minutes: [MotionService.ActivityKind: Int]
+
+    private var total: Int { max(1, minutes.values.reduce(0, +)) }
+    private var ordered: [(MotionService.ActivityKind, Int)] {
+        MotionService.ActivityKind.allCases.compactMap { k in
+            minutes[k].map { (k, $0) }
+        }.filter { $0.1 > 0 }.sorted { $0.1 > $1.1 }
+    }
+
+    var body: some View {
+        GlowPanel {
+            VStack(alignment: .leading, spacing: 12) {
+                Label("ACTIVITY TODAY", systemImage: "waveform.path.ecg")
+                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+
+                // Stacked proportion bar.
+                GeometryReader { geo in
+                    HStack(spacing: 2) {
+                        ForEach(ordered, id: \.0) { kind, mins in
+                            Rectangle()
+                                .fill(kind == .stationary ? AnyShapeStyle(GlowTheme.faint) : AnyShapeStyle(GlowTheme.accentGradient))
+                                .frame(width: max(2, geo.size.width * CGFloat(mins) / CGFloat(total)))
+                        }
+                    }
+                }
+                .frame(height: 8)
+                .clipShape(Capsule())
+
+                ForEach(ordered, id: \.0) { kind, mins in
+                    HStack(spacing: 10) {
+                        Image(systemName: kind.systemImage)
+                            .font(.system(size: 14)).foregroundStyle(GlowTheme.accent).frame(width: 22)
+                        Text(kind.title).font(GlowTheme.body(15)).foregroundStyle(GlowTheme.ink)
+                        Spacer()
+                        Text(durationText(mins)).font(.system(size: 14, weight: .semibold)).foregroundStyle(GlowTheme.inkMuted)
+                    }
+                }
+
+                if let sitting = minutes[.stationary], sitting >= 240 {
+                    Text("You've been still for a while — a short walk would help recovery.")
+                        .font(GlowTheme.caption()).foregroundStyle(GlowTheme.accent)
+                }
+            }
+        }
+    }
+
+    private func durationText(_ m: Int) -> String {
+        m >= 60 ? "\(m / 60)h \(m % 60)m" : "\(m)m"
     }
 }
 
