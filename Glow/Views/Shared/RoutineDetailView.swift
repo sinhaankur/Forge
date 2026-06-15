@@ -10,8 +10,13 @@ struct RoutineDetailView: View {
     @StateObject private var health = HealthService.shared
 
     let routine: Routine
+    @Query private var profiles: [UserProfile]
     @State private var checked: Set<PersistentIdentifier> = []
     @State private var achieved = ""
+
+    private var boosts: [HormoneInsight.Boost] {
+        HormoneInsight.boosts(for: routine, profile: profiles.first)
+    }
 
     private var alreadyDone: Bool { RoutineStore.isCompleted(routine, on: .now) }
 
@@ -28,6 +33,8 @@ struct RoutineDetailView: View {
                             .font(GlowTheme.body(15))
                             .foregroundStyle(GlowTheme.inkMuted)
                     }
+
+                    if !boosts.isEmpty { moodBoostCard }
 
                     VStack(spacing: 0) {
                         ForEach(routine.orderedSteps) { step in
@@ -98,6 +105,32 @@ struct RoutineDetailView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+    }
+
+    private var moodBoostCard: some View {
+        GlowPanel {
+            VStack(alignment: .leading, spacing: 10) {
+                Label("FEEL-GOOD BOOST", systemImage: "sparkles")
+                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.accent)
+                Text("Likely brain-chemistry lift from this session" +
+                     (profiles.first?.aerobic == .high ? ", tuned to your high aerobic genetics:" : ":"))
+                    .font(GlowTheme.body(13)).foregroundStyle(GlowTheme.inkMuted)
+                ForEach(boosts) { b in
+                    HStack(spacing: 10) {
+                        Image(systemName: b.chemical.systemImage)
+                            .font(.system(size: 14)).foregroundStyle(GlowTheme.accent).frame(width: 22)
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(b.chemical.title).font(.system(size: 15, weight: .semibold)).foregroundStyle(GlowTheme.ink)
+                            Text(b.chemical.blurb).font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+                        }
+                        Spacer()
+                        Text(b.label).font(.system(size: 11)).foregroundStyle(GlowTheme.accent)
+                    }
+                }
+                Text("General wellness estimate — not a measurement or medical advice.")
+                    .font(GlowTheme.caption()).foregroundStyle(GlowTheme.inkMuted)
+            }
+        }
     }
 
     private func targetSection(_ metric: TargetMetric) -> some View {

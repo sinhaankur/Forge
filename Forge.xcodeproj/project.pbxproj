@@ -32,6 +32,7 @@
 		8C48F36B7A6177F61BF1EBB4 /* ExerciseFigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D94D4D82780EA95BE55042 /* ExerciseFigure.swift */; };
 		8DE75CBBAED5A450CC594B62 /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E38F3F45E856BED97F187A /* RoutineListView.swift */; };
 		93BA021775AC6501A9B2AA90 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E14CC2A1677F706B152395 /* WelcomeView.swift */; };
+		947EDF7A71566D64FA7F6834 /* HormoneInsight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D02324C2958C1546EF9B8D8 /* HormoneInsight.swift */; };
 		A821F3EBA78AED8BEAF0E237 /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2000CF36A7D27D9FD267B9 /* MotionService.swift */; };
 		AA0C702B7D42D652DBC857A3 /* RoutineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */; };
 		BA39F19BAD0871C12740391E /* DNAInsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873682C642D8FE4D265FFD1E /* DNAInsightsView.swift */; };
@@ -77,6 +78,7 @@
 		22B0A67DFD89A8755B6BDA77 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		26D94D4D82780EA95BE55042 /* ExerciseFigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFigure.swift; sourceTree = "<group>"; };
 		2B61EB89A6E2875B55709449 /* NutritionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionView.swift; sourceTree = "<group>"; };
+		2D02324C2958C1546EF9B8D8 /* HormoneInsight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HormoneInsight.swift; sourceTree = "<group>"; };
 		3BD2E63488DD8CCBD2623030 /* HealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
 		3C4F6319A9DB13A31FB362B9 /* ExerciseLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibrary.swift; sourceTree = "<group>"; };
 		3D0464C95BC671D743DE623B /* GlowWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowWatchApp.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				BAFB0F2277988707A0641826 /* DNAImporter.swift */,
 				3C4F6319A9DB13A31FB362B9 /* ExerciseLibrary.swift */,
 				3BD2E63488DD8CCBD2623030 /* HealthService.swift */,
+				2D02324C2958C1546EF9B8D8 /* HormoneInsight.swift */,
 				DB2000CF36A7D27D9FD267B9 /* MotionService.swift */,
 				EC36222163248A94522BA5E4 /* NotificationService.swift */,
 				6153CB2421AFD6BA201A97F6 /* RoutineStore.swift */,
@@ -347,6 +350,7 @@
 				4CB391AAAC6C6212FE20FA02 /* ExerciseLibrary.swift in Sources */,
 				6BD44DF5EDA1396D65BBAB7F /* GlowApp.swift in Sources */,
 				4A4B8EBBED0DA08CCF6419EF /* HealthService.swift in Sources */,
+				947EDF7A71566D64FA7F6834 /* HormoneInsight.swift in Sources */,
 				01EAF64CD8FD2AF662351119 /* Models.swift in Sources */,
 				A821F3EBA78AED8BEAF0E237 /* MotionService.swift in Sources */,
 				FD9C69117FD5B1322AA455F0 /* NotificationService.swift in Sources */,
